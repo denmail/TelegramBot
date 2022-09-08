@@ -1,9 +1,10 @@
 import lombok.Getter;
-import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
-import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-public final class Bot extends TelegramLongPollingCommandBot {
+public final class Bot extends TelegramLongPollingBot {
 
     private final String BOT_NAME;
     private final String BOT_TOKEN;
@@ -25,13 +26,20 @@ public final class Bot extends TelegramLongPollingCommandBot {
         return BOT_NAME;
     }
 
-    /**
-     * Ответ на запрос, не являющийся командой
-     */
     @Override
-    public void processNonCommandUpdate(Update update) {
-        Message msg = update.getMessage();
-        Long chatId = msg.getChatId();
+    public void onUpdateReceived(Update update) {
+
     }
 
+    public synchronized void sendMsg(String chatId, String s) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.enableMarkdown(true);
+        sendMessage.setChatId(chatId);
+        sendMessage.setText(s);
+        try {
+            sendMessage(sendMessage);
+        } catch (TelegramApiException e) {
+            log.log(Level.SEVERE, "Exception: ", e.toString());
+        }
+    }
 }
