@@ -28,18 +28,23 @@ public final class Bot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-
-    }
-
-    public synchronized void sendMsg(String chatId, String s) {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.enableMarkdown(true);
-        sendMessage.setChatId(chatId);
-        sendMessage.setText(s);
         try {
-            sendMessage(sendMessage);
+            //проверяем есть ли сообщение и текстовое ли оно
+            if (update.hasMessage() && update.getMessage().hasText()) {
+                //Извлекаем объект входящего сообщения
+                Message inMessage = update.getMessage();
+                //Создаем исходящее сообщение
+                SendMessage outMessage = new SendMessage();
+                //Указываем в какой чат будем отправлять сообщение 
+                //(в тот же чат, откуда пришло входящее сообщение)
+                outMessage.setChatId(inMessage.getChatId());
+                //Указываем текст сообщения
+                outMessage.setText(inMessage.getText());
+                //Отправляем сообщение
+                execute(outMessage);
+            }
         } catch (TelegramApiException e) {
-            log.log(Level.SEVERE, "Exception: ", e.toString());
+            e.printStackTrace();
         }
     }
 }
