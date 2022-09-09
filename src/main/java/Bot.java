@@ -34,6 +34,11 @@ public final class Bot extends TelegramLongPollingBot {
         try {
             //проверяем есть ли сообщение и текстовое ли оно
             if (update.hasCallbackQuery()) {
+                if (update.getCallbackQuery().getData().contains("subGroupJoin")) {
+                    execute(new SendMessage("" + update.getCallbackQuery().getMessage().getChatId(),"EBALA"));
+                    PrimatManager.registerPrimat(this, update.getCallbackQuery().getMessage().getChatId(),update.getCallbackQuery().getData(), update.getMessage().getForwardFrom());
+                    return;
+                }
                 SendMessage outMessage = new SendMessage();
                 //Указываем в какой чат будем отправлять сообщение
                 //(в тот же чат, откуда пришло входящее сообщение)
@@ -41,10 +46,6 @@ public final class Bot extends TelegramLongPollingBot {
                 outMessage.setText(update.getCallbackQuery().getMessage().getText());
 
                 //Указываем текст сообщения
-                if (update.getCallbackQuery().getData().equals("subGroup1"))
-                    outMessage.setText("Ok!");
-                if (update.getCallbackQuery().getData().equals("subGroup2"))
-                    outMessage.setText("Ok!");
                 execute(outMessage);
 
 
@@ -52,8 +53,7 @@ public final class Bot extends TelegramLongPollingBot {
                 //Извлекаем объект входящего сообщения
                 Message inMessage = update.getMessage();
                 if (inMessage.getText().equals("/start")) {
-                    execute(new SendMessage("" + inMessage.getChatId(),"EBALA"));
-                    PrimatManager.registerPrimat(this, update);
+                    PrimatManager.startMessage(this, inMessage.getChatId());
                     return;
                 }
                 //Создаем исходящее сообщение
