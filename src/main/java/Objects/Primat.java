@@ -1,3 +1,5 @@
+package Objects;
+
 import org.telegram.telegrambots.meta.api.objects.User;
 
 public class Primat extends User {
