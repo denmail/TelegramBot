@@ -1,18 +1,13 @@
-<<<<<<< HEAD
-=======
 import Test.Test;
->>>>>>> ce4e0e1633618a3d3e3f9932e39c7da9520ec018
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-<<<<<<< HEAD
-=======
 import java.util.HashMap;
 
->>>>>>> ce4e0e1633618a3d3e3f9932e39c7da9520ec018
 public final class Bot extends TelegramLongPollingBot {
     private final String BOT_NAME;
     private final String BOT_TOKEN;
@@ -37,16 +32,33 @@ public final class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         try {
-            NotificationKeyboard notificationKeyboard = new NotificationKeyboard();
-            if (update.hasMessage() && update.getMessage().hasText()) {
-<<<<<<< HEAD
+            //проверяем есть ли сообщение и текстовое ли оно
+            if (update.hasCallbackQuery()) {
+                SendMessage outMessage = new SendMessage();
+                //Указываем в какой чат будем отправлять сообщение
+                //(в тот же чат, откуда пришло входящее сообщение)
+                outMessage.setChatId(update.getCallbackQuery().getMessage().getChatId());
+                outMessage.setText(update.getCallbackQuery().getMessage().getText());
 
-=======
+                //Указываем текст сообщения
+                if (update.getCallbackQuery().getData().equals("subGroup1"))
+                    outMessage.setText("Ok!");
+                if (update.getCallbackQuery().getData().equals("subGroup2"))
+                    outMessage.setText("Ok!");
+                execute(outMessage);
+
+
+            } else if (update.hasMessage() && update.getMessage().hasText()) {
                 //Извлекаем объект входящего сообщения
                 Message inMessage = update.getMessage();
+                if (inMessage.getText().equals("/start")) {
+                    execute(new SendMessage("" + inMessage.getChatId(),"EBALA"));
+                    PrimatManager.registerPrimat(this, update);
+                    return;
+                }
                 //Создаем исходящее сообщение
                 SendMessage outMessage = new SendMessage();
-                //Указываем в какой чат будем отправлять сообщение 
+                //Указываем в какой чат будем отправлять сообщение
                 //(в тот же чат, откуда пришло входящее сообщение)
                 outMessage.setChatId(inMessage.getChatId());
                 //Указываем текст сообщения
@@ -55,28 +67,9 @@ public final class Bot extends TelegramLongPollingBot {
                 outMessage.setReplyMarkup(Test.getInlineKeyboard());
                 //Отправляем сообщение
                 execute(outMessage);
-            } else if (update.hasCallbackQuery()) {
-                SendMessage outMessage = new SendMessage();
-                //Указываем в какой чат будем отправлять сообщение
-                //(в тот же чат, откуда пришло входящее сообщение)
-                outMessage.setChatId(update.getCallbackQuery().getMessage().getChatId());
-                outMessage.setText(update.getCallbackQuery().getMessage().getText());
-
-                //Указываем текст сообщения
-                if (update.getCallbackQuery().getData().equals("Button1"))
-                    outMessage.setText("1");
-                if (update.getCallbackQuery().getData().equals("Button2"))
-                    outMessage.setText("2");
-                execute(outMessage);
->>>>>>> ce4e0e1633618a3d3e3f9932e39c7da9520ec018
             }
-        } catch (Exception e) {
+        } catch (TelegramApiException e) {
             e.printStackTrace();
         }
     }
-
-    public void exeSendPhoto() {
-
-    }
-
 }
