@@ -51,8 +51,13 @@ public final class Bot extends TelegramLongPollingBot {
                 //Указываем в какой чат будем отправлять сообщение
                 //(в тот же чат, откуда пришло входящее сообщение)
                 outMessage.setChatId(update.getCallbackQuery().getMessage().getChatId());
+                outMessage.setText(update.getCallbackQuery().getMessage().getText());
+
                 //Указываем текст сообщения
-                outMessage.setText("Полностью согласен, брат.");
+                if (update.getCallbackQuery().getData().equals("Button1"))
+                    outMessage.setText("1");
+                if (update.getCallbackQuery().getData().equals("Button2"))
+                    outMessage.setText("2");
                 execute(outMessage);
             }
         } catch (TelegramApiException e) {
