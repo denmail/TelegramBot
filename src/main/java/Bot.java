@@ -1,3 +1,4 @@
+import Test.Test;
 import lombok.Getter;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -41,7 +42,17 @@ public final class Bot extends TelegramLongPollingBot {
                 outMessage.setChatId(inMessage.getChatId());
                 //Указываем текст сообщения
                 outMessage.setText(inMessage.getText());
+
+                outMessage.setReplyMarkup(Test.getInlineKeyboard());
                 //Отправляем сообщение
+                execute(outMessage);
+            } else if (update.hasCallbackQuery()) {
+                SendMessage outMessage = new SendMessage();
+                //Указываем в какой чат будем отправлять сообщение
+                //(в тот же чат, откуда пришло входящее сообщение)
+                outMessage.setChatId(update.getCallbackQuery().getMessage().getChatId());
+                //Указываем текст сообщения
+                outMessage.setText("Полностью согласен, брат.");
                 execute(outMessage);
             }
         } catch (TelegramApiException e) {
