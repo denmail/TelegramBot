@@ -10,8 +10,8 @@ public class StartCommand extends Command{
         super(commandText);
     }
 
-
-    public static void doCommand(AbsSender bot, String chat_id) throws TelegramApiException {
+    @Override
+    public void doCommand(AbsSender bot, String chat_id) throws TelegramApiException {
         bot.execute(new SendMessage(chat_id,"EBALA"));
     }
 }

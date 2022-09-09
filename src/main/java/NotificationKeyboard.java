@@ -13,7 +13,7 @@ public class NotificationKeyboard extends KeyboardButton {
 
         // Создаем клавиуатуру
         ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
-        sendMessage.setReplyMarkup(replyKeyboardMarkup);
+
         replyKeyboardMarkup.setSelective(true);
         replyKeyboardMarkup.setResizeKeyboard(true);
         replyKeyboardMarkup.setOneTimeKeyboard(false);
@@ -24,18 +24,23 @@ public class NotificationKeyboard extends KeyboardButton {
         // Первая строчка клавиатуры
         KeyboardRow keyboardFirstRow = new KeyboardRow();
         // Добавляем кнопки в первую строчку клавиатуры
-        keyboardFirstRow.add(new KeyboardButton("Расписание"));
-
+        KeyboardButton kb1 = new KeyboardButton();
+        kb1.setText("Неделя");
+        KeyboardButton kb2 = new KeyboardButton();
+        kb2.setText("Расписание");
+        keyboardFirstRow.add(kb1);
+        System.out.println("333");
         // Вторая строчка клавиатуры
         KeyboardRow keyboardSecondRow = new KeyboardRow();
         // Добавляем кнопки во вторую строчку клавиатуры
-        keyboardSecondRow.add(new KeyboardButton("Помощь"));
+        keyboardSecondRow.add(kb2);
 
         // Добавляем все строчки клавиатуры в список
         keyboard.add(keyboardFirstRow);
         keyboard.add(keyboardSecondRow);
         // и устанваливаем этот список нашей клавиатуре
         replyKeyboardMarkup.setKeyboard(keyboard);
+        sendMessage.setReplyMarkup(replyKeyboardMarkup);
     }
 
     public synchronized void chooseSchedule(SendMessage sendMessage) {

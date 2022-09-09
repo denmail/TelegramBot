@@ -12,6 +12,7 @@ public class CommandManager {
 
     public CommandManager(){
         StartCommand startCommand = new StartCommand("/start");
+        WeekCommand weekCommand = new WeekCommand("Неделя");
     }
 
     public static boolean register(String commandName, Command command) {
@@ -28,7 +29,8 @@ public class CommandManager {
             commands.get(inMsg).doCommand(bot, chat_id);
             return true;
         } else {
-            NotCommand.doCommand(bot, chat_id);
+            NotCommand nc = new NotCommand();
+            nc.doCommand(bot, chat_id);
             return false;
         }
     }
