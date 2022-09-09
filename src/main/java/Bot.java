@@ -66,7 +66,7 @@ public final class Bot extends TelegramLongPollingBot {
                 //Извлекаем объект входящего сообщения
                 Message inMessage = update.getMessage();
                 try {
-                    cm.findCommand(inMessage.getText(), this, inMessage.getChatId().toString());
+                    cm.findCommand(inMessage.getText(), this, update);
                     System.out.println("1");
                 } catch (TelegramApiException e) {
                     e.printStackTrace();

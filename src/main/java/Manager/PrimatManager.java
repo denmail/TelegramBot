@@ -1,6 +1,7 @@
 package Manager;
 
 import Objects.Primat;
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -15,6 +16,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Reader;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -24,24 +26,17 @@ import java.util.Map;
 
 public class PrimatManager {
     private static HashMap<String, Primat> Makara = new HashMap<>();
-    private static HashMap<Long, String> chatIdToUsername = new HashMap<>();
     private static String turip_photo = "AgACAgIAAxkBAAIBZWMblFUnu1a6pe1v0WD9__iug73hAAINwDEb6PeQSKbEairiIDAmAQADAgADeAADKQQ";
 
     public static void addPrimat(Primat primat) {
         Makara.put(primat.getUsername(), primat);
-        chatIdToUsername.put(primat.getChatId(), primat.getUsername());
     }
 
     public static Primat getPrimat(String username) {
         if (Makara.containsKey(username)) {
-           return Makara.get(username);
-        }
-        return null;
-    }
-
-    public static Primat getPrimat(Long chatId) {
-        if (chatIdToUsername.containsKey(chatId)) {
-            return Makara.get(chatIdToUsername.get(chatId));
+            System.out.println("Makara <3 " + username);
+            Primat primat = Makara.get(username);
+           return primat;
         }
         return null;
     }
@@ -127,13 +122,12 @@ public class PrimatManager {
 
             Gson gson = new Gson();
 
-            HashMap<String, Primat> makara = gson.fromJson(reader, HashMap.class);
+            Type mapType = new TypeToken<HashMap<String,Primat>>(){}.getType();
+
+            HashMap<String, Primat> makara = gson.fromJson(reader, mapType);
             Makara = makara;
-            HashMap<Long, String> hashMap = new HashMap<>();
-            for (Map.Entry<String,Primat> entry : makara.entrySet()) {
-                hashMap.put(entry.getValue().getChatId(),entry.getKey());
-            };
-            chatIdToUsername = hashMap;
+            System.out.println("ahuet'");
+
             reader.close();
             System.out.println("LOADED");
         } catch (IOException e) {
