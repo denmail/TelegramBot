@@ -28,12 +28,15 @@ public class NotificationKeyboard extends KeyboardButton {
         kb1.setText("Неделя");
         KeyboardButton kb2 = new KeyboardButton();
         kb2.setText("Расписание");
+        KeyboardButton kb3 = new KeyboardButton();
+        kb2.setText("Пара");
         keyboardFirstRow.add(kb1);
-        System.out.println("333");
+
         // Вторая строчка клавиатуры
         KeyboardRow keyboardSecondRow = new KeyboardRow();
         // Добавляем кнопки во вторую строчку клавиатуры
         keyboardSecondRow.add(kb2);
+        keyboardSecondRow.add(kb3);
 
         // Добавляем все строчки клавиатуры в список
         keyboard.add(keyboardFirstRow);

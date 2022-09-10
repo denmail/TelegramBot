@@ -1,6 +1,7 @@
 import Manager.CommandManager;
 import Command.StartCommand;
 import Manager.PrimatManager;
+import Manager.ScheduleManager;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
@@ -26,6 +27,7 @@ public final class Bot extends TelegramLongPollingBot {
         this.BOT_NAME = botName;
         this.BOT_TOKEN = botToken;
         PrimatManager.loadMakara();
+        ScheduleManager sm = new ScheduleManager();
     }
 
     @Override

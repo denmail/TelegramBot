@@ -15,6 +15,7 @@ public class CommandManager {
         StartCommand startCommand = new StartCommand("/start");
         GoFuckYourselfCommand goFuckYourselfCommand = new GoFuckYourselfCommand("послать");
         WeekCommand weekCommand = new WeekCommand("неделя");
+        NextCoupleCommand nextCoupleCommand = new NextCoupleCommand("пара");
     }
 
     public static boolean register(String commandName, Command command) {

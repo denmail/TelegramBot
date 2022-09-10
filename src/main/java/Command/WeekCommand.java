@@ -17,13 +17,12 @@ public class WeekCommand extends Command{
 
     @Override
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
-        Date date = new Date();
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(Long.toString(update.getMessage().getChatId()));
-        sendMessage.setText(isOdd(date)?"Числитель":"Знаменатель");
+        sendMessage.setText(isOdd()?"Числитель":"Знаменатель");
         bot.execute(sendMessage);
     }
-    private Boolean isOdd(Date date){
+    private Boolean isOdd(){
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(new Date());
         return calendar.get(Calendar.WEEK_OF_MONTH) % 2 != 0;
