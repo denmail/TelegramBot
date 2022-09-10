@@ -13,7 +13,9 @@ public class Command {
         this.commandText = commandText;
         System.out.println(CommandManager.containsCommand(commandText));
     }
-     public Command(){
+     public Command() {
+
+     }
 
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
         System.out.println("baza");

@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class PrimatManager {
     private static HashMap<String, Primat> Makara = new HashMap<>();
-    private static String turip_photo = "AgACAgIAAxkBAAIBZWMblFUnu1a6pe1v0WD9__iug73hAAINwDEb6PeQSKbEairiIDAmAQADAgADeAADKQQ";
+    private static String turip_photo = "AgACAgIAAxkBAAIEc2Mb17qSwCo2XM7VWbdBrx-TRKU9AAIIxDEb6uHgSD08SgQoixwOAQADAgADeAADKQQ";
 
     public static void addPrimat(Primat primat) {
         Makara.put(primat.getUsername(), primat);

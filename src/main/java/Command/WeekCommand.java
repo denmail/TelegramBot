@@ -1,6 +1,7 @@
 package Command;
 
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -15,10 +16,10 @@ public class WeekCommand extends Command{
     }
 
     @Override
-    public void doCommand(AbsSender bot, String chat_id) throws TelegramApiException {
+    public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
         Date date = new Date();
         SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(chat_id);
+        sendMessage.setChatId(Long.toString(update.getMessage().getChatId()));
         sendMessage.setText(isOdd(date)?"Числитель":"Знаменатель");
         bot.execute(sendMessage);
     }
