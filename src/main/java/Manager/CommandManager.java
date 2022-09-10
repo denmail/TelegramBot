@@ -2,6 +2,7 @@ package Manager;
 
 import Command.*;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
+import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -12,6 +13,8 @@ public class CommandManager {
 
     public CommandManager(){
         StartCommand startCommand = new StartCommand("/start");
+        LoadCommand loadCommand = new LoadCommand("/load");
+        GoFuckYourselfCommand goFuckYourselfCommand = new GoFuckYourselfCommand("послать");
         WeekCommand weekCommand = new WeekCommand("Неделя");
     }
 
@@ -24,13 +27,13 @@ public class CommandManager {
         }
     }
 
-    public static boolean findCommand(String inMsg, AbsSender bot, String chat_id) throws TelegramApiException {
-        if(commands.containsKey(inMsg)) {
-            commands.get(inMsg).doCommand(bot, chat_id);
+    public static boolean findCommand(String inMsg, AbsSender bot, Update update) throws TelegramApiException {
+        if(commands.containsKey(inMsg.split(" ")[0].toLowerCase())) {
+            commands.get(inMsg.split(" ")[0].toLowerCase()).doCommand(bot, update);
             return true;
         } else {
             NotCommand nc = new NotCommand();
-            nc.doCommand(bot, chat_id);
+            nc.doCommand(bot, update);
             return false;
         }
     }
