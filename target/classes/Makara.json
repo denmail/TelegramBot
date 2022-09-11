@@ -4,13 +4,20 @@
     "username": "deniskotk",
     "name": "Denis",
     "chatId": 929016294,
-    "role": "Primat"
+    "role": "Admin"
   },
   "wostarnn": {
     "subGroup": 1,
     "username": "wostarnn",
     "name": "David",
     "chatId": 796496528,
+    "role": "Primat"
+  },
+  "Wanderer_Of_Darkness": {
+    "subGroup": 2,
+    "username": "Wanderer_Of_Darkness",
+    "name": "Helheim",
+    "chatId": 1201029667,
     "role": "Primat"
   }
 }

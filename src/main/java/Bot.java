@@ -1,7 +1,8 @@
+import Command.GoFuckYourselfCommand;
 import Manager.CommandManager;
-import Command.StartCommand;
 import Manager.PrimatManager;
 import Manager.ScheduleManager;
+import NotificationKeyboard.NotificationKeyboard;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
@@ -9,10 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import java.util.HashMap;
 
 import java.util.Comparator;
 import java.util.List;
@@ -21,7 +19,6 @@ public final class Bot extends TelegramLongPollingBot {
     private final String BOT_NAME;
     private final String BOT_TOKEN;
     CommandManager cm = new CommandManager();
-    NotificationKeyboard nk = new NotificationKeyboard();
     public Bot(String botName, String botToken) {
         super();
         this.BOT_NAME = botName;
@@ -51,19 +48,18 @@ public final class Bot extends TelegramLongPollingBot {
                     return;
                 }
 
-                /*if (update.getCallbackQuery().getData().contains("FuckReply")) {
-                    try {
-                        cm.findCommand(inMessage.getText(), this, inMessage.getChatId().toString());
-                        System.out.println("1");
-                    } catch (TelegramApiException e) {
-                        e.printStackTrace();
-                    }
-                }*/
+                if (update.getCallbackQuery().getData().contains("FuckReply")) {
+                    System.out.println("RRR");
+                    GoFuckYourselfCommand.Reply(this, update);
+                    System.out.println("FUCKREPLY!");
+                    return;
+
+                }
                 SendMessage outMessage = new SendMessage();
                 //Указываем в какой чат будем отправлять сообщение
                 //(в тот же чат, откуда пришло входящее сообщение)
                 outMessage.setChatId(update.getCallbackQuery().getMessage().getChatId());
-                outMessage.setText("Ok!");
+                outMessage.setText("Совсем не Ok!");
 
                 //Указываем текст сообщения
                 execute(outMessage);
@@ -74,19 +70,11 @@ public final class Bot extends TelegramLongPollingBot {
                 Message inMessage = update.getMessage();
                 try {
                     cm.findCommand(inMessage.getText(), this, update);
-                    System.out.println("1");
                 } catch (TelegramApiException e) {
                     e.printStackTrace();
                 }
-                ReplyKeyboardMarkup rkm = new ReplyKeyboardMarkup();
-                SendMessage sendMessage = new SendMessage();
-                sendMessage.setChatId(inMessage.getChatId());
-                sendMessage.enableMarkdown(true);
-                sendMessage.setText("Заебись");
-                nk.setButtons(sendMessage);
-                execute(sendMessage);
             }
-            else if (update.hasMessage() && update.getMessage().hasPhoto()) {
+            /*else if (update.hasMessage() && update.getMessage().hasPhoto()) {
                 // Message contains photo
                 // Set variables
                 long chat_id = update.getMessage().getChatId();
@@ -120,7 +108,7 @@ public final class Bot extends TelegramLongPollingBot {
                 } catch (TelegramApiException e) {
                     e.printStackTrace();
                 }
-            }
+            } */
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }

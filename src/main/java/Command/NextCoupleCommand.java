@@ -34,14 +34,14 @@ public class NextCoupleCommand extends Command{
         Date date = new Date();
         Primat primat = PrimatManager.getPrimat(update.getMessage().getFrom().getUserName());
         System.out.println("--"+primat.getSubGroup());
-        System.out.println("--"+isOdd(date));
+        System.out.println("--"+isOdd(date)+"--");
         System.out.println("--"+getDay(date));
-        System.out.println("--"+getNextCouple());
-        Couple couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date)+1, getDay(date), getNextCouple());
+        System.out.println("--"+getNextCouple()+"++");
+        Couple couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date), getNextCouple());
         SendMessage sendMessage = new SendMessage();
         System.out.println(update.getMessage().getChatId()+"-----");
         sendMessage.setChatId(update.getMessage().getChatId());
-        sendMessage.setText(String.format("%s в %s кабинете не потеряйся", couple.name, couple.office));
+        sendMessage.setText(String.format("%s в %s, не потеряйся!", couple.name, couple.office));
         System.out.println("c3");
         bot.execute(sendMessage);
     }
@@ -53,7 +53,7 @@ public class NextCoupleCommand extends Command{
     private int getDay(Date date) {
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
-        return calendar.get(Calendar.DAY_OF_WEEK)-1;
+        return (calendar.get(Calendar.DAY_OF_WEEK) + 5)%7;
     }
     private int getNextCouple() {
         System.out.println("c1");

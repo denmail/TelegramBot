@@ -4,9 +4,11 @@ import Objects.Primat;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -14,9 +16,11 @@ import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
+import java.nio.Buffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -26,7 +30,8 @@ import java.util.Map;
 
 public class PrimatManager {
     private static HashMap<String, Primat> Makara = new HashMap<>();
-    private static String turip_photo = "AgACAgIAAxkBAAIEc2Mb17qSwCo2XM7VWbdBrx-TRKU9AAIIxDEb6uHgSD08SgQoixwOAQADAgADeAADKQQ";
+
+    private static final String turip_photo = "src/main/resources/images/turip.jpg";
 
     public static void addPrimat(Primat primat) {
         Makara.put(primat.getUsername(), primat);
@@ -34,7 +39,6 @@ public class PrimatManager {
 
     public static Primat getPrimat(String username) {
         if (Makara.containsKey(username)) {
-            System.out.println("Makara <3 " + username);
             Primat primat = Makara.get(username);
            return primat;
         }
@@ -78,7 +82,8 @@ public class PrimatManager {
             Primat primat = new Primat(user, data.contains("1") ? 1 : 2, "Primat");
             addPrimat(primat);
             SendPhoto sendPhoto = new SendPhoto();
-            sendPhoto.setPhoto(new InputFile(turip_photo));
+            File turip = new File(turip_photo);
+            sendPhoto.setPhoto(new InputFile(turip));
             sendPhoto.setChatId(chatId);
             sendPhoto.setCaption("Добро пожаловать в отряд приматов");
 
@@ -126,7 +131,6 @@ public class PrimatManager {
 
             HashMap<String, Primat> makara = gson.fromJson(reader, mapType);
             Makara = makara;
-            System.out.println("ahuet'");
 
             reader.close();
             System.out.println("LOADED");

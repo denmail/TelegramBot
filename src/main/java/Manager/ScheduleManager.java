@@ -16,7 +16,6 @@ public class ScheduleManager {
     public ScheduleManager() {
         schedule = new Schedule();
         readSchedule();
-        System.out.println(schedule.groups.get(1).weeks.get(0).days.get(0).couples.get(0).office);
     }
 
     public void readSchedule(){
@@ -24,27 +23,25 @@ public class ScheduleManager {
             reader = Files.newBufferedReader(Paths.get("src/main/resources/Schedule.json"));
             Gson gson = new Gson();
             schedule = gson.fromJson(reader, Schedule.class);
-            System.out.println("c3");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public static Couple getCouple(int group, int week, int day, int noCouple){
-        int c = noCouple-1, d = day-1, w = week-1, g = group-1;
+        int c = noCouple-1, d = day, w = week + 1, g = group-1;
+        System.out.println("w="+w);
         if(c == 3){
             c = 0;
-            d ++;
+            d++;
         }
-        if(d >= 4) {
+        if(d > 4) {
             d = 0;
-            week++;
+            w++;
         }
-        if(week == 2) {
-            week = 0;
-        }
+        w %= 2;
         System.out.printf("%d, %d, %d, %d\n", g, w, d, c);
-        System.out.println(schedule.groups.get(group).weeks.get(week).days.get(day).couples.get(noCouple).name);
-        return schedule.groups.get(group).weeks.get(week).days.get(day).couples.get(noCouple);
+        System.out.println(schedule.groups.get(g).weeks.get(w).days.get(d).couples.get(c).name);
+        return schedule.groups.get(g).weeks.get(w).days.get(d).couples.get(c);
     }
 }

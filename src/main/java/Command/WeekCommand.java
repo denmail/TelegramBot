@@ -19,6 +19,7 @@ public class WeekCommand extends Command{
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(Long.toString(update.getMessage().getChatId()));
+        System.out.println(isOdd());
         sendMessage.setText(isOdd()?"Числитель":"Знаменатель");
         bot.execute(sendMessage);
     }
