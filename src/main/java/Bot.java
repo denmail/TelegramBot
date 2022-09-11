@@ -49,7 +49,6 @@ public final class Bot extends TelegramLongPollingBot {
                 }
 
                 if (update.getCallbackQuery().getData().contains("FuckReply")) {
-                    System.out.println("RRR");
                     GoFuckYourselfCommand.Reply(this, update);
                     System.out.println("FUCKREPLY!");
                     return;
