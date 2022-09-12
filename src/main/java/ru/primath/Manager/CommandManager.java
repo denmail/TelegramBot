@@ -40,7 +40,7 @@ public class CommandManager {
             return true;
         } else {
 
-            commands.get("").doCommand(bot, update);
+            commands.get("Команды не будет").doCommand(bot, update);
             return false;
         }
     }
