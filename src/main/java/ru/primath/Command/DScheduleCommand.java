@@ -16,7 +16,7 @@ import java.util.GregorianCalendar;
 
 public class DScheduleCommand extends Command{
     private LocalTime c4e = LocalTime.parse("16:55:00");
-
+    String[] days = {"Понедельник", "Вторник", "Среда", "Четверг", "Пятница"};
     public DScheduleCommand(String commandText) {
         super(commandText);
     }
@@ -25,7 +25,7 @@ public class DScheduleCommand extends Command{
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
         Date date = new Date();
         Primat primat = PrimatManager.getPrimat(update.getMessage().getFrom().getUserName());
-        String msg = "Расписание на день:\n\n";
+        String msg = String.format("Расписание на %s:\n\n",days[getDay(date)]);
         for (int i = 1; i <= 4; i++) {
             Couple couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date)+afterFourCouple(), i);
             if(couple.name.contains("none")){
