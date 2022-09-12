@@ -18,7 +18,7 @@ import java.util.List;
 public class MessageManager {
 
     private static final String primat_photo = "src/main/resources/images/Primat.jpg";
-    private static final String menu_photo = "src/main/resources/images/Menu.jpg";
+    private static final String menu_photo = "src/main/resources/images/menu.jpg";
     private static final String registerAccepted_photo = "src/main/resources/images/registerAccepted.jpg";
     private static final String registerAborted_photo = "src/main/resources/images/registerAborted.jpg";
 
