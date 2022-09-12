@@ -63,8 +63,8 @@ public class NextCoupleCommand extends Command{
             System.out.println("r4");
             return 4;
         } else{
-            System.out.println("r1");
-            return 1;
+            System.out.println("r4");
+            return 4;
         }
     }
 }
