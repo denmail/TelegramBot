@@ -16,7 +16,7 @@ public class CommandManager {
     public CommandManager(){
         StartCommand startCommand = new StartCommand("/start");
         GoFuckYourselfCommand goFuckYourselfCommand = new GoFuckYourselfCommand("послать");
-        WeekCommand weekCommand = new WeekCommand("неделя");
+        WeekCommand weekCommand = new WeekCommand("числитель/знаменатель");
         NextCoupleCommand nextCoupleCommand = new NextCoupleCommand("пара");
         FeedbackCommand feedbackCommand = new FeedbackCommand("связь");
         CScheduleCommand cScheduleCommand = new CScheduleCommand("расписание");

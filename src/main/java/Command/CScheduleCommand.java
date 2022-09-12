@@ -14,7 +14,14 @@ public class CScheduleCommand extends Command{
     @Override
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
         SendMessage sendMessage = new SendMessage();
+        sendMessage.setText("Расписание: ");
+        sendMessage.setChatId(update.getMessage().getChatId());
         NotificationKeyboard nc = new NotificationKeyboard();
         nc.chooseSchedule(sendMessage);
+        try {
+            bot.execute(sendMessage);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
     }
 }

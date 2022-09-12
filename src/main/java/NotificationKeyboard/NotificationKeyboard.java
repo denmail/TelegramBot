@@ -75,7 +75,7 @@ public class NotificationKeyboard extends KeyboardButton {
 
         // Добавляем кнопки в первую строчку клавиатуры
         KeyboardButton kb1 = new KeyboardButton();
-        kb1.setText("Неделя");
+        kb1.setText("Числитель/Знаменатель");
         KeyboardButton kb2 = new KeyboardButton();
         kb2.setText("Расписание");
         KeyboardButton kb3 = new KeyboardButton();
