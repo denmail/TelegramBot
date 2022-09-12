@@ -1,10 +1,10 @@
 package Command;
 
+import Manager.MessageManager;
 import Manager.PrimatManager;
 import Manager.ScheduleManager;
 import Objects.Primat;
 import Objects.Schedule.Couple;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -37,11 +37,7 @@ public class NextCoupleCommand extends Command{
         if(couple.name.contains("none")) {
             couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date), getNextCouple()+1);
         }
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(update.getMessage().getChatId());
-
-        sendMessage.setText(String.format("%s в %s, не потеряйся!", couple.name, couple.office));
-        bot.execute(sendMessage);
+        bot.execute(MessageManager.nextCoupleMessage(update.getMessage().getChatId(), couple));
     }
     private int isOdd(Date date) {
         Calendar calendar = new GregorianCalendar();

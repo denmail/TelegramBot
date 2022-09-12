@@ -1,7 +1,6 @@
 package Command;
 
 import Manager.MessageManager;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -18,8 +17,7 @@ public class WeekCommand extends Command{
 
     @Override
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
-        SendMessage weekMessage = MessageManager.weekMessage(update.getMessage().getChatId(), isOdd());
-        bot.execute(weekMessage);
+        bot.execute(MessageManager.weekMessage(update.getMessage().getChatId(), isOdd()));
     }
     private Boolean isOdd(){
         Calendar calendar = new GregorianCalendar();

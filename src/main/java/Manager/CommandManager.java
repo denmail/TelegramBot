@@ -1,9 +1,6 @@
 package Manager;
 
 import Command.*;
-import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageMedia;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -19,7 +16,7 @@ public class CommandManager {
         WeekCommand weekCommand = new WeekCommand("числитель/знаменатель");
         NextCoupleCommand nextCoupleCommand = new NextCoupleCommand("пара");
         FeedbackCommand feedbackCommand = new FeedbackCommand("связь");
-        CScheduleCommand cScheduleCommand = new CScheduleCommand("расписание");
+        ChooseScheduleCommand chooseScheduleCommand = new ChooseScheduleCommand("расписание");
         MenuCommand menuCommand = new MenuCommand("меню");
         DScheduleCommand dScheduleCommand = new DScheduleCommand("день");
         WScheduleCommand wScheduleCommand = new WScheduleCommand("неделя");
