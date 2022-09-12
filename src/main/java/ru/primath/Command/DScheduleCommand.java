@@ -49,7 +49,7 @@ public class DScheduleCommand extends Command{
     }
     private int afterFourCouple() {
         LocalTime now = LocalTime.now();
-        if (now.isBefore(c4e)) {
+        if (now.isAfter(c4e)) {
             System.out.println("1111111");
             return 1;
         }
