@@ -1,6 +1,5 @@
 package ru.primath.Command;
 
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import ru.primath.Manager.MessageManager;
 import ru.primath.Manager.PrimatManager;
 import ru.primath.Manager.ScheduleManager;
@@ -22,7 +21,6 @@ public class DScheduleCommand extends Command{
     @Override
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
         Date date = new Date();
-        PrimatManager PrimatManager = new PrimatManager();
         Primat primat = PrimatManager.getPrimat(update.getMessage().getFrom().getUserName());
         String msg = "Расписание на день:\n\n";
         for (int i = 1; i <= 4; i++) {

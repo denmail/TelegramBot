@@ -1,7 +1,5 @@
 package ru.primath.Command;
 
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageReplyMarkup;
 import ru.primath.Manager.MessageManager;
 import ru.primath.Manager.PrimatManager;
 import ru.primath.Objects.Primat;
