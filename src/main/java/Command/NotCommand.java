@@ -1,5 +1,6 @@
 package Command;
 
+import Manager.MessageManager;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -13,9 +14,7 @@ public class NotCommand extends Command{
 
     @Override
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(update.getMessage().getChatId());
-        sendMessage.setText("Неизвестная команда");
-        bot.execute(sendMessage);
+        SendMessage notCommandMessage = MessageManager.notCommandMessage(update.getMessage().getChatId());
+        bot.execute(notCommandMessage);
     }
 }

@@ -1,6 +1,7 @@
 package Command;
 
-import NotificationKeyboard.NotificationKeyboard;
+import Manager.KeyboardManager;
+import Manager.MessageManager;
 import Objects.Menu;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -14,10 +15,7 @@ public class MenuCommand extends Command {
 
 
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
-        SendPhoto sendMenu = Menu.sendMenu();
-        sendMenu.setChatId(update.getMessage().getChatId());
-        NotificationKeyboard nc = new NotificationKeyboard();
-        nc.setButtons(sendMenu);
-        bot.execute(sendMenu);
+        SendPhoto menuMessage = MessageManager.menuMessage(update.getMessage().getChatId());
+        bot.execute(menuMessage);
     }
 }

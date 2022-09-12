@@ -1,6 +1,6 @@
 package Command;
 
-import NotificationKeyboard.NotificationKeyboard;
+import Manager.KeyboardManager;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.bots.AbsSender;
@@ -16,7 +16,7 @@ public class CScheduleCommand extends Command{
         SendMessage sendMessage = new SendMessage();
         sendMessage.setText("Расписание: ");
         sendMessage.setChatId(update.getMessage().getChatId());
-        NotificationKeyboard nc = new NotificationKeyboard();
+        KeyboardManager nc = new KeyboardManager();
         nc.chooseSchedule(sendMessage);
         bot.execute(sendMessage);
     }

@@ -1,5 +1,6 @@
 package Command;
 
+import Manager.MessageManager;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.bots.AbsSender;
@@ -17,11 +18,8 @@ public class WeekCommand extends Command{
 
     @Override
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(Long.toString(update.getMessage().getChatId()));
-        System.out.println(isOdd());
-        sendMessage.setText(isOdd()?"Числитель":"Знаменатель");
-        bot.execute(sendMessage);
+        SendMessage weekMessage = MessageManager.weekMessage(update.getMessage().getChatId(), isOdd());
+        bot.execute(weekMessage);
     }
     private Boolean isOdd(){
         Calendar calendar = new GregorianCalendar();
