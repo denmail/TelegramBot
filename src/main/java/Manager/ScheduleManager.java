@@ -29,9 +29,9 @@ public class ScheduleManager {
     }
 
     public static Couple getCouple(int group, int week, int day, int noCouple){
-        int c = noCouple-1, d = day, w = week + 1, g = group-1;
+        int c = noCouple-1, d = day, w = week, g = group-1;
         System.out.println("w="+w);
-        if(c == 3){
+        if(c > 3){
             c = 0;
             d++;
         }

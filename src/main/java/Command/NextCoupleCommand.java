@@ -33,16 +33,14 @@ public class NextCoupleCommand extends Command{
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
         Date date = new Date();
         Primat primat = PrimatManager.getPrimat(update.getMessage().getFrom().getUserName());
-        System.out.println("--"+primat.getSubGroup());
-        System.out.println("--"+isOdd(date)+"--");
-        System.out.println("--"+getDay(date));
-        System.out.println("--"+getNextCouple()+"++");
         Couple couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date), getNextCouple());
+        if(couple.name.contains("none")) {
+            couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date), getNextCouple()+1);
+        }
         SendMessage sendMessage = new SendMessage();
-        System.out.println(update.getMessage().getChatId()+"-----");
         sendMessage.setChatId(update.getMessage().getChatId());
+
         sendMessage.setText(String.format("%s в %s, не потеряйся!", couple.name, couple.office));
-        System.out.println("c3");
         bot.execute(sendMessage);
     }
     private int isOdd(Date date) {
@@ -56,21 +54,21 @@ public class NextCoupleCommand extends Command{
         return (calendar.get(Calendar.DAY_OF_WEEK) + 5)%7;
     }
     private int getNextCouple() {
-        System.out.println("c1");
         LocalTime now = LocalTime.now();
         if (now.isBefore(c1b) || now.isAfter(c4e)) {
-            System.out.println("t1");
+            System.out.println("r1");
             return 1;
         } else if (now.isBefore(c2b)) {
-            System.out.println("t2");
+            System.out.println("r2");
             return 2;
         } else if (now.isBefore(c3b)) {
-            System.out.println("t3");
+            System.out.println("r3");
             return 3;
         } else if (now.isBefore(c4b)) {
-            System.out.println("t4");
+            System.out.println("r4");
             return 4;
         } else{
+            System.out.println("r1");
             return 1;
         }
     }
