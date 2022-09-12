@@ -31,8 +31,6 @@ import java.util.Map;
 public class PrimatManager {
     private static HashMap<String, Primat> Makara = new HashMap<>();
 
-    private static final String turip_photo = "src/main/resources/images/turip.jpg";
-
     public static void addPrimat(Primat primat) {
         Makara.put(primat.getUsername(), primat);
     }
@@ -45,68 +43,7 @@ public class PrimatManager {
         return null;
     }
 
-    public static void startMessage(AbsSender absSender, Long chatId) {
-        //Сообщение после /start
-        SendMessage settings = new SendMessage();
-        settings.setText("Здарова, приматище!\nИз какой подгруппы будешь?");
-        settings.setChatId(chatId);
-        //Кнопка первой подгруппы
-        InlineKeyboardButton subGroupButton1 = new InlineKeyboardButton();
-        subGroupButton1.setText("Первая");
-        subGroupButton1.setCallbackData("subGroupJoin1");
-        //Кнопка второй подгруппы
-        InlineKeyboardButton subGroupButton2 = new InlineKeyboardButton();
-        subGroupButton2.setText("Вторая");
-        subGroupButton2.setCallbackData("subGroupJoin2");
-        //Строка с подгруппами
-        List<InlineKeyboardButton> subGroupRow = new ArrayList<>();
-        subGroupRow.add(subGroupButton1);
-        subGroupRow.add(subGroupButton2);
-        //Клавиатура с подгуппами (да-да, из одной строки)
-        List<List<InlineKeyboardButton>> subGroupKeyboard = new ArrayList<>();
-        subGroupKeyboard.add(subGroupRow);
-        //Разметка клавиатуры (финалочка короче)
-        InlineKeyboardMarkup subGroupKeyboardMarkup = new InlineKeyboardMarkup();
-        subGroupKeyboardMarkup.setKeyboard(subGroupKeyboard);
-        //Прикрепляем клавиатуру к сообщению
-        settings.setReplyMarkup(subGroupKeyboardMarkup);
-        try {
-            absSender.execute(settings);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void registerPrimat(AbsSender absSender, Long chatId, String data, User user) {
-        if (!Makara.containsKey(user.getUserName())) {
-            Primat primat = new Primat(user, data.contains("1") ? 1 : 2, "Primat");
-            addPrimat(primat);
-            SendPhoto sendPhoto = new SendPhoto();
-            File turip = new File(turip_photo);
-            sendPhoto.setPhoto(new InputFile(turip));
-            sendPhoto.setChatId(chatId);
-            sendPhoto.setCaption("Добро пожаловать в отряд приматов");
-
-            try {
-                absSender.execute(sendPhoto);
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
-            saveMakara();
-
-        } else {
-            SendMessage sendMessage = new SendMessage();
-            sendMessage.setChatId(chatId);
-            sendMessage.setText("Без обид, но ты и так уже примат\n(Сменить ориентацию можно в Настройках)");
-            try {
-                absSender.execute(sendMessage);
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private static void saveMakara() {
+    public static void saveMakara() {
         try {
             BufferedWriter writer = Files.newBufferedWriter( Paths.get("src/main/resources/Makara.json"));
 

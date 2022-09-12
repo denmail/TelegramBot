@@ -1,21 +1,12 @@
 import Command.FeedbackCommand;
 import Command.GoFuckYourselfCommand;
-import Manager.CommandManager;
-import Manager.PrimatManager;
-import Manager.ScheduleManager;
-import NotificationKeyboard.NotificationKeyboard;
+import Manager.*;
 import Objects.Primat;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
-import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import java.util.Comparator;
-import java.util.List;
 
 public final class Bot extends TelegramLongPollingBot {
     private final String BOT_NAME;
@@ -45,29 +36,7 @@ public final class Bot extends TelegramLongPollingBot {
             //проверяем есть ли сообщение и текстовое ли оно
             if (update.hasCallbackQuery()) {
                 String queryData = update.getCallbackQuery().getData();
-                if (queryData.contains("subGroupJoin")) {
-                    PrimatManager.registerPrimat(this, update.getCallbackQuery().getMessage().getChatId(), update.getCallbackQuery().getData(), update.getCallbackQuery().getFrom());
-                    return;
-                }
-
-                if (queryData.contains("FuckReply")) {
-                    GoFuckYourselfCommand.Reply(this, update);
-                    return;
-
-                }
-
-                if (queryData.contains("Feedback")) {
-                    FeedbackCommand.setupReply(this, update);
-                    return;
-                }
-                SendMessage outMessage = new SendMessage();
-                //Указываем в какой чат будем отправлять сообщение
-                //(в тот же чат, откуда пришло входящее сообщение)
-                outMessage.setChatId(update.getCallbackQuery().getMessage().getChatId());
-                outMessage.setText("Совсем не Ok!");
-
-                //Указываем текст сообщения
-                execute(outMessage);
+                InlineManager.checkCallbackQueryData(queryData, this, update);
 
 
             } else if (update.hasMessage() && update.getMessage().hasText()) {
@@ -80,7 +49,7 @@ public final class Bot extends TelegramLongPollingBot {
                         SendMessage sendMessage = new SendMessage();
                         sendMessage.setChatId(checkPrimat.getChatId());
                         sendMessage.setText("Дублирую сообщение:\n\n" + inMessage.getText());
-                        NotificationKeyboard nk = new NotificationKeyboard();
+                        KeyboardManager nk = new KeyboardManager();
                         nk.setButtons(sendMessage);
                         try {
                             execute(sendMessage);

@@ -1,4 +1,4 @@
-package NotificationKeyboard;
+package Manager;
 
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
@@ -9,7 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotificationKeyboard extends KeyboardButton {
+public class KeyboardManager extends KeyboardButton {
 
     public synchronized void setButtons(SendMessage sendMessage) {
 
