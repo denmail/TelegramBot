@@ -9,11 +9,14 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class DScheduleCommand extends Command{
+    private LocalTime c4e = LocalTime.parse("16:55:00");
+    String[] days = {"Понедельник", "Вторник", "Среда", "Четверг", "Пятница"};
     public DScheduleCommand(String commandText) {
         super(commandText);
     }
@@ -22,9 +25,9 @@ public class DScheduleCommand extends Command{
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
         Date date = new Date();
         Primat primat = PrimatManager.getPrimat(update.getMessage().getFrom().getUserName());
-        String msg = "Расписание на день:\n\n";
+        String msg = String.format("Расписание на %s:\n\n",days[getDay(date)+afterFourCouple()]);
         for (int i = 1; i <= 4; i++) {
-            Couple couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date), i);
+            Couple couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date)+afterFourCouple(), i);
             if(couple.name.contains("none")){
                 msg += String.format("%d: --\n", i);
             } else {
@@ -43,5 +46,13 @@ public class DScheduleCommand extends Command{
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
         return (calendar.get(Calendar.DAY_OF_WEEK) + 5)%7;
+    }
+    private int afterFourCouple() {
+        LocalTime now = LocalTime.now();
+        if (now.isAfter(c4e)) {
+            System.out.println("1111111");
+            return 1;
+        }
+        return 0;
     }
 }

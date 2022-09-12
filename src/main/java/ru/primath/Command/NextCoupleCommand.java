@@ -34,7 +34,7 @@ public class NextCoupleCommand extends Command{
         Primat primat = PrimatManager.getPrimat(update.getMessage().getFrom().getUserName());
         Couple couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date), getNextCouple());
         if(couple.name.contains("none")) {
-            couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date), getNextCouple()+1);
+            couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date), getNextCouple());
         }
         bot.execute(MessageManager.nextCoupleMessage(update.getMessage().getChatId(), couple));
     }
@@ -50,7 +50,7 @@ public class NextCoupleCommand extends Command{
     }
     private int getNextCouple() {
         LocalTime now = LocalTime.now();
-        if (now.isBefore(c1b) || now.isAfter(c4e)) {
+        if (now.isBefore(c1b)) {
             System.out.println("r1");
             return 1;
         } else if (now.isBefore(c2b)) {
@@ -59,12 +59,12 @@ public class NextCoupleCommand extends Command{
         } else if (now.isBefore(c3b)) {
             System.out.println("r3");
             return 3;
-        } else if (now.isBefore(c4b)) {
+        } else if (now.isBefore(c4e)) {
             System.out.println("r4");
             return 4;
         } else{
-            System.out.println("r1");
-            return 1;
+            System.out.println("r4");
+            return 5;
         }
     }
 }

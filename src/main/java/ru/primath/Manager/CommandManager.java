@@ -11,6 +11,7 @@ public class CommandManager {
     static HashMap<String, Command> commands = new HashMap<>();
 
     public CommandManager(){
+        NotCommand nc = new NotCommand();
         StartCommand startCommand = new StartCommand("/start");
         GoFuckYourselfCommand goFuckYourselfCommand = new GoFuckYourselfCommand("послать");
         WeekCommand weekCommand = new WeekCommand("числитель/знаменатель");
@@ -20,6 +21,7 @@ public class CommandManager {
         MenuCommand menuCommand = new MenuCommand("меню");
         DScheduleCommand dScheduleCommand = new DScheduleCommand("день");
         WScheduleCommand wScheduleCommand = new WScheduleCommand("неделя");
+
     }
 
     public static boolean register(String commandName, Command command) {
@@ -37,8 +39,8 @@ public class CommandManager {
             commands.get(inMsg.split(" ")[0].toLowerCase().replaceAll("\\s+", " ")).doCommand(bot, update);
             return true;
         } else {
-            NotCommand nc = new NotCommand();
-            nc.doCommand(bot, update);
+
+            commands.get("Команды не будет").doCommand(bot, update);
             return false;
         }
     }
