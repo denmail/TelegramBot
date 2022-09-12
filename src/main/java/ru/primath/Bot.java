@@ -32,6 +32,7 @@ public final class Bot extends TelegramLongPollingBot {
         return BOT_NAME;
     }
     //я ЕБАЛ
+    //мать гита
     @Override
     public void onUpdateReceived(Update update) {
         try {
