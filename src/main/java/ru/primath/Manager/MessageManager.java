@@ -1,16 +1,15 @@
 package ru.primath.Manager;
 
 import ru.primath.Objects.Primat;
+import ru.primath.Objects.Schedule.Couple;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -162,5 +161,71 @@ public class MessageManager {
         fuckMessageToReceiver.setText(primatLink + " возвращает тебе билет на пешее эротическое, наслаждайся!");
         fuckMessageToReceiver.setChatId(toPrimat.getChatId());
         return fuckMessageToReceiver;
+    }
+
+    public static SendMessage nextCoupleMessage(Long chatId, Couple couple) {
+        SendMessage nextCoupleMessage = new SendMessage();
+        nextCoupleMessage.setChatId(chatId);
+        nextCoupleMessage.setText(String.format("%s в %s, не потеряйся!", couple.name, couple.office));
+        return nextCoupleMessage;
+    }
+
+    public static SendMessage chooseScheduleMessage(Long chatId) {
+        SendMessage chooseScheduleMessage = new SendMessage();
+        chooseScheduleMessage.setText("Расписание: ");
+        chooseScheduleMessage.setChatId(chatId);
+        KeyboardManager km = new KeyboardManager();
+        km.chooseSchedule(chooseScheduleMessage);
+        return chooseScheduleMessage;
+    }
+
+    public static SendMessage scheduleMessage(Long chatId, String msg) {
+        SendMessage dayScheduleMessage = new SendMessage();
+        dayScheduleMessage.setChatId(chatId);
+        dayScheduleMessage.setText(msg);
+        return dayScheduleMessage;
+    }
+
+    public static SendMessage feedbackMessage(Long chatId) {
+        SendMessage feedbackMessage = new SendMessage();
+        feedbackMessage.setText("С кем нужно связаться?");
+        feedbackMessage.setChatId(chatId);
+
+        InlineKeyboardButton feedbackButton1 = new InlineKeyboardButton();
+        feedbackButton1.setText("Староста");
+        feedbackButton1.setCallbackData("FeedbackLeader");
+
+        InlineKeyboardButton feedbackButton2 = new InlineKeyboardButton();
+        feedbackButton2.setText("Администрация");
+        feedbackButton2.setCallbackData("FeedbackAdministration");
+        List<InlineKeyboardButton> feedbackRow1 = new ArrayList<>();
+        feedbackRow1.add(feedbackButton1);
+        feedbackRow1.add(feedbackButton2);
+
+        List<List<InlineKeyboardButton>> feedbackKeyboard = new ArrayList<>();
+        feedbackKeyboard.add(feedbackRow1);
+
+        InlineKeyboardMarkup feedbackKeyboardMarkup = new InlineKeyboardMarkup();
+        feedbackKeyboardMarkup.setKeyboard(feedbackKeyboard);
+
+        feedbackMessage.setReplyMarkup(feedbackKeyboardMarkup);
+        return feedbackMessage;
+    }
+
+    public static SendMessage sendFeedbackMessage(Primat primat) {
+        SendMessage sendFeedbackMessage = new SendMessage();
+        sendFeedbackMessage.setText("Введите ваше сообщение:");
+        sendFeedbackMessage.setChatId(primat.getChatId());
+        primat.setFeedbackMessage(true);
+        return sendFeedbackMessage;
+    }
+
+    public static SendMessage feedbackReplyMessage(Long chatId, String message) {
+        SendMessage feedbackReplyMessage = new SendMessage();
+        feedbackReplyMessage.setChatId(chatId);
+        feedbackReplyMessage.setText("Дублирую сообщение:\n\n" + message);
+        KeyboardManager keyboardManager = new KeyboardManager();
+        keyboardManager.setButtons(feedbackReplyMessage);
+        return feedbackReplyMessage;
     }
 }

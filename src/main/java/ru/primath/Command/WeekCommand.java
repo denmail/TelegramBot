@@ -18,8 +18,7 @@ public class WeekCommand extends Command{
 
     @Override
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
-        SendMessage weekMessage = MessageManager.weekMessage(update.getMessage().getChatId(), isOdd());
-        bot.execute(weekMessage);
+        bot.execute(MessageManager.weekMessage(update.getMessage().getChatId(), isOdd()));
     }
     private Boolean isOdd(){
         Calendar calendar = new GregorianCalendar();

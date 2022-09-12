@@ -1,15 +1,15 @@
 package ru.primath.Command;
 
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.bots.AbsSender;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import ru.primath.Manager.MessageManager;
 import ru.primath.Manager.PrimatManager;
 import ru.primath.Manager.ScheduleManager;
 import ru.primath.Objects.Primat;
 import ru.primath.Objects.Schedule.Couple;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
@@ -37,11 +37,7 @@ public class NextCoupleCommand extends Command{
         if(couple.name.contains("none")) {
             couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date), getNextCouple()+1);
         }
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(update.getMessage().getChatId());
-
-        sendMessage.setText(String.format("%s в %s, не потеряйся!", couple.name, couple.office));
-        bot.execute(sendMessage);
+        bot.execute(MessageManager.nextCoupleMessage(update.getMessage().getChatId(), couple));
     }
     private int isOdd(Date date) {
         Calendar calendar = new GregorianCalendar();

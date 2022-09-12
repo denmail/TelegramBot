@@ -19,7 +19,7 @@ public class CommandManager {
         WeekCommand weekCommand = new WeekCommand("числитель/знаменатель");
         NextCoupleCommand nextCoupleCommand = new NextCoupleCommand("пара");
         FeedbackCommand feedbackCommand = new FeedbackCommand("связь");
-        CScheduleCommand cScheduleCommand = new CScheduleCommand("расписание");
+        ChooseScheduleCommand chooseScheduleCommand = new ChooseScheduleCommand("расписание");
         MenuCommand menuCommand = new MenuCommand("меню");
         DScheduleCommand dScheduleCommand = new DScheduleCommand("день");
         WScheduleCommand wScheduleCommand = new WScheduleCommand("неделя");

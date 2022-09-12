@@ -13,7 +13,7 @@
     "name": "Helheim",
     "chatId": 1201029667,
     "role": "Primat",
-    "feedbackMessage": true
+    "feedbackMessage": false
   },
   "deekod": {
     "subGroup": 2,

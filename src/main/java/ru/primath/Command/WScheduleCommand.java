@@ -1,13 +1,13 @@
 package ru.primath.Command;
 
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.bots.AbsSender;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import ru.primath.Manager.MessageManager;
 import ru.primath.Manager.PrimatManager;
 import ru.primath.Manager.ScheduleManager;
 import ru.primath.Objects.Primat;
 import ru.primath.Objects.Schedule.Couple;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -24,10 +24,8 @@ public class WScheduleCommand extends Command{
         String[] days = {"Понедельник", "Вторник", "Среда", "Четверг", "Пятница"};
         Primat primat = PrimatManager.getPrimat(update.getMessage().getFrom().getUserName());
         String msg = "Расписание на неделю:\n\n";
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(primat.getChatId());
-        sendMessage.setText(msg);
-        bot.execute(sendMessage);
+
+        bot.execute(MessageManager.scheduleMessage(primat.getChatId(), msg));
         for (int i = 0; i < 5; i++) {
             msg = days[i]+":\n\n";
             for (int j = 1; j <= 4; j++) {
@@ -38,8 +36,7 @@ public class WScheduleCommand extends Command{
                     msg += String.format("%d: %s в %s\n", j, couple.name, couple.office);
                 }
             }
-            sendMessage.setText(msg);
-            bot.execute(sendMessage);
+            bot.execute(MessageManager.scheduleMessage(primat.getChatId(), msg));
         }
     }
     private int isOdd(Date date) {
