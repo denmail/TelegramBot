@@ -50,7 +50,7 @@ public class NextCoupleCommand extends Command{
     }
     private int getNextCouple() {
         LocalTime now = LocalTime.now();
-        if (now.isBefore(c1b) || now.isAfter(c4e)) {
+        if (now.isBefore(c1b)) {
             System.out.println("r1");
             return 1;
         } else if (now.isBefore(c2b)) {
