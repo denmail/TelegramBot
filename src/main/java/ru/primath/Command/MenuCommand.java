@@ -1,5 +1,6 @@
 package ru.primath.Command;
 
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import ru.primath.Manager.MessageManager;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.bots.AbsSender;

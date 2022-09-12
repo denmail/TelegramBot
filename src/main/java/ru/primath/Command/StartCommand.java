@@ -1,9 +1,14 @@
 package ru.primath.Command;
 
-import ru.primath.Manager.MessageManager;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import ru.primath.Manager.MessageManager;
+
+import java.io.File;
 
 public class StartCommand extends Command{
 
@@ -13,8 +18,10 @@ public class StartCommand extends Command{
 
     @Override
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
-        bot.execute(MessageManager.startPhoto(update.getMessage().getChatId()));
+        SendPhoto startPhoto = MessageManager.startPhoto(update.getMessage().getChatId());
+        bot.execute(startPhoto);
 
-        bot.execute(MessageManager.startMessage(update.getMessage().getChatId()));
+        SendMessage startMessage = MessageManager.startMessage(update.getMessage().getChatId());
+        bot.execute(startMessage);
     }
 }
