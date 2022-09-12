@@ -34,7 +34,7 @@ public class NextCoupleCommand extends Command{
         Primat primat = PrimatManager.getPrimat(update.getMessage().getFrom().getUserName());
         Couple couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date), getNextCouple());
         if(couple.name.contains("none")) {
-            couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date), getNextCouple()+1);
+            couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date), getNextCouple());
         }
         bot.execute(MessageManager.nextCoupleMessage(update.getMessage().getChatId(), couple));
     }
