@@ -28,7 +28,8 @@ public final class Bot extends TelegramLongPollingBot {
     public String getBotUsername() {
         return BOT_NAME;
     }
-
+    //я ЕБАЛ
+    //мать гита
     @Override
     public void onUpdateReceived(Update update) {
         try {
