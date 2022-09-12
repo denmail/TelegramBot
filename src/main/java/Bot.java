@@ -1,8 +1,10 @@
+import Command.FeedbackCommand;
 import Command.GoFuckYourselfCommand;
 import Manager.CommandManager;
 import Manager.PrimatManager;
 import Manager.ScheduleManager;
 import NotificationKeyboard.NotificationKeyboard;
+import Objects.Primat;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
@@ -42,17 +44,21 @@ public final class Bot extends TelegramLongPollingBot {
         try {
             //проверяем есть ли сообщение и текстовое ли оно
             if (update.hasCallbackQuery()) {
-
-                if (update.getCallbackQuery().getData().contains("subGroupJoin")) {
+                String queryData = update.getCallbackQuery().getData();
+                if (queryData.contains("subGroupJoin")) {
                     PrimatManager.registerPrimat(this, update.getCallbackQuery().getMessage().getChatId(), update.getCallbackQuery().getData(), update.getCallbackQuery().getFrom());
                     return;
                 }
 
-                if (update.getCallbackQuery().getData().contains("FuckReply")) {
+                if (queryData.contains("FuckReply")) {
                     GoFuckYourselfCommand.Reply(this, update);
-                    System.out.println("FUCKREPLY!");
                     return;
 
+                }
+
+                if (queryData.contains("Feedback")) {
+                    FeedbackCommand.setupReply(this, update);
+                    return;
                 }
                 SendMessage outMessage = new SendMessage();
                 //Указываем в какой чат будем отправлять сообщение
@@ -67,6 +73,23 @@ public final class Bot extends TelegramLongPollingBot {
             } else if (update.hasMessage() && update.getMessage().hasText()) {
                 //Извлекаем объект входящего сообщения
                 Message inMessage = update.getMessage();
+                Primat checkPrimat = PrimatManager.getPrimat(update.getMessage().getFrom().getUserName());
+                if (checkPrimat != null) {
+                    if (checkPrimat.isFeedbackMessage()) {
+                        checkPrimat.setFeedbackMessage(false);
+                        SendMessage sendMessage = new SendMessage();
+                        sendMessage.setChatId(checkPrimat.getChatId());
+                        sendMessage.setText("Дублирую сообщение:\n\n" + inMessage.getText());
+                        NotificationKeyboard nk = new NotificationKeyboard();
+                        nk.setButtons(sendMessage);
+                        try {
+                            execute(sendMessage);
+                        } catch (TelegramApiException e) {
+                            e.printStackTrace();
+                        }
+                        return;
+                    }
+                }
                 try {
                     cm.findCommand(inMessage.getText(), this, update);
                 } catch (TelegramApiException e) {

@@ -20,6 +20,7 @@ public class CommandManager {
         NextCoupleCommand nextCoupleCommand = new NextCoupleCommand("пара");
         FeedbackCommand feedbackCommand = new FeedbackCommand("связь");
         CScheduleCommand cScheduleCommand = new CScheduleCommand("расписание");
+        MenuCommand menuCommand = new MenuCommand("меню");
     }
 
     public static boolean register(String commandName, Command command) {

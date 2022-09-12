@@ -8,12 +8,15 @@ public class Primat {
     private String name;
     private Long chatId;
     private String role;
+
+    private boolean feedbackMessage;
     public Primat(User user, int subGroup, String role) {
         this.username = user.getUserName();
         this.name = user.getFirstName();
         this.chatId = user.getId();
         this.subGroup = subGroup;
         this.role = role;
+        this.feedbackMessage = false;
     }
 
     public String getUsername() {
@@ -34,5 +37,13 @@ public class Primat {
 
     public String getRole() {
         return role;
+    }
+
+    public boolean isFeedbackMessage() {
+        return feedbackMessage;
+    }
+
+    public void setFeedbackMessage(boolean feedbackMessage) {
+        this.feedbackMessage = feedbackMessage;
     }
 }

@@ -124,8 +124,9 @@ public class NotificationKeyboard extends KeyboardButton {
         KeyboardRow keyboardFirstRow = new KeyboardRow();
         // Добавляем кнопки в первую строчку клавиатуры
         keyboardFirstRow.add(new KeyboardButton("Неделя"));
+        keyboardFirstRow.add(new KeyboardButton("День"));
         KeyboardRow keyboardSecondRow = new KeyboardRow();
-        keyboardSecondRow.add(new KeyboardButton("День"));
+        keyboardSecondRow.add(new KeyboardButton("Меню"));
 
         keyboard.add(keyboardFirstRow);
         keyboard.add(keyboardSecondRow);

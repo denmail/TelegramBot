@@ -26,11 +26,7 @@ public class StartCommand extends Command{
         sendPhoto.setChatId(update.getMessage().getChatId());
         NotificationKeyboard nc = new NotificationKeyboard();
         nc.setButtons(sendPhoto);
-        try {
-            bot.execute(sendPhoto);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
+        bot.execute(sendPhoto);
 
         PrimatManager.startMessage(bot, update.getMessage().getChatId());
     }
