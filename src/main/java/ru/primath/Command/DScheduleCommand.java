@@ -25,7 +25,7 @@ public class DScheduleCommand extends Command{
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
         Date date = new Date();
         Primat primat = PrimatManager.getPrimat(update.getMessage().getFrom().getUserName());
-        String msg = String.format("Расписание на %s:\n\n",days[getDay(date)]);
+        String msg = String.format("Расписание на %s:\n\n",days[getDay(date)+afterFourCouple()]);
         for (int i = 1; i <= 4; i++) {
             Couple couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date)+afterFourCouple(), i);
             if(couple.name.contains("none")){
