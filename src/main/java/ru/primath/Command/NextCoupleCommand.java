@@ -59,12 +59,12 @@ public class NextCoupleCommand extends Command{
         } else if (now.isBefore(c3b)) {
             System.out.println("r3");
             return 3;
-        } else if (now.isBefore(c4b)) {
+        } else if (now.isBefore(c4e)) {
             System.out.println("r4");
             return 4;
         } else{
             System.out.println("r4");
-            return 4;
+            return 5;
         }
     }
 }
