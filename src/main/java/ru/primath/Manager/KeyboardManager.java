@@ -25,15 +25,15 @@ public class KeyboardManager extends KeyboardButton {
 
         // Добавляем кнопки в первую строчку клавиатуры
         KeyboardButton kb1 = new KeyboardButton();
-        kb1.setText("Неделя");
+        kb1.setText("Числитель/Знаменатель");
         KeyboardButton kb2 = new KeyboardButton();
         kb2.setText("Расписание");
         KeyboardButton kb3 = new KeyboardButton();
         kb3.setText("Пара");
         KeyboardButton kb4 = new KeyboardButton();
-        kb4.setText("Связь со старостой");
+        kb4.setText("Связь");
         KeyboardButton kb5 = new KeyboardButton();
-        kb5.setText("Связь с админами");
+        kb5.setText("Настройки");
 
         // Первая строчка клавиатуры
         KeyboardRow keyboardFirstRow = new KeyboardRow();
