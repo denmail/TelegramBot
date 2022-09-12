@@ -21,6 +21,8 @@ public class CommandManager {
         FeedbackCommand feedbackCommand = new FeedbackCommand("связь");
         CScheduleCommand cScheduleCommand = new CScheduleCommand("расписание");
         MenuCommand menuCommand = new MenuCommand("меню");
+        DScheduleCommand dScheduleCommand = new DScheduleCommand("день");
+        WScheduleCommand wScheduleCommand = new WScheduleCommand("неделя");
     }
 
     public static boolean register(String commandName, Command command) {
