@@ -25,6 +25,7 @@ public class DScheduleCommand extends Command{
         String msg = "Расписание на день:\n\n";
         for (int i = 1; i <= 4; i++) {
             Couple couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date), i);
+            System.out.println("asdflasjkdfhlaskjdhflkasj");
             if(couple.name.contains("none")){
                 msg += String.format("%d: --\n", i);
             } else {
