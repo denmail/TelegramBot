@@ -19,6 +19,7 @@ public class CommandManager {
         WeekCommand weekCommand = new WeekCommand("неделя");
         NextCoupleCommand nextCoupleCommand = new NextCoupleCommand("пара");
         FeedbackCommand feedbackCommand = new FeedbackCommand("связь");
+        CScheduleCommand cScheduleCommand = new CScheduleCommand("расписание");
     }
 
     public static boolean register(String commandName, Command command) {
