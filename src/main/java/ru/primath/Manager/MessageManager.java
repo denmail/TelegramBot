@@ -80,12 +80,11 @@ public class MessageManager {
         if (PrimatManager.getPrimat(user.getUserName()) == null) {
             String data = callbackQuery.getData();
 
-            Primat primat = new Primat(user, data.contains("1") ? 1 : 2, "Primat");
+            Primat primat = new Primat(user, (byte)(data.contains("1") ? 1 : 2), "Primat");
+            DBManager.primatToDB(primat.getSubGroup(), primat.getUsername(), primat.getName(), primat.getChatId(), primat.getRole());
             PrimatManager.addPrimat(primat);
             registerPhoto.setPhoto(new InputFile(new File(registerAccepted_photo)));
             registerPhoto.setCaption("Добро пожаловать в отряд приматов");
-
-            PrimatManager.saveMakara();
 
         } else {
             registerPhoto.setPhoto(new InputFile(new File(registerAborted_photo)));

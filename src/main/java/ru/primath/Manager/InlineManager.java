@@ -17,7 +17,6 @@ public class InlineManager {
             return;
 
         }
-
         System.out.println("Ты не должен был здесь оказаться...");
     }
 }

@@ -3,13 +3,13 @@ package ru.primath.Objects;
 import org.telegram.telegrambots.meta.api.objects.User;
 
 public class Primat {
-    private int subGroup;
+    private byte subGroup;
     private String username;
     private String name;
     private Long chatId;
     private String role;
 
-    public Primat(User user, int subGroup, String role) {
+    public Primat(User user, byte subGroup, String role) {
         this.username = user.getUserName();
         this.name = user.getFirstName();
         this.chatId = user.getId();
@@ -17,7 +17,11 @@ public class Primat {
         this.role = role;
     }
 
-    public Primat(String role) {
+    public Primat(byte subGroup, String username, String name, Long chatId, String role) {
+        this.subGroup = subGroup;
+        this.username = username;
+        this.name = name;
+        this.chatId = chatId;
         this.role = role;
     }
 
@@ -25,7 +29,7 @@ public class Primat {
         return username;
     }
 
-    public int getSubGroup() {
+    public byte getSubGroup() {
         return subGroup;
     }
 

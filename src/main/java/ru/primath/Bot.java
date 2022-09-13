@@ -1,7 +1,6 @@
 package ru.primath;
 
 import ru.primath.Manager.*;
-import ru.primath.Objects.Primat;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -16,8 +15,8 @@ public final class Bot extends TelegramLongPollingBot {
         this.BOT_NAME = botName;
         this.BOT_TOKEN = botToken;
         System.out.println(botName);
-        PrimatManager.loadMakara();
         ScheduleManager sm = new ScheduleManager();
+        DBManager.loadPrimatsFromDB();
     }
 
     @Override
