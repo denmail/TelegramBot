@@ -34,9 +34,10 @@ public class CommandManager {
     }
 
     public static boolean findCommand(String inMsg, AbsSender bot, Update update) throws TelegramApiException {
-        if(commands.containsKey(inMsg.split(" ")[0].toLowerCase().replaceAll("\\s+", " "))) {
-            System.out.println("Команда распознана");
-            commands.get(inMsg.split(" ")[0].toLowerCase().replaceAll("\\s+", " ")).doCommand(bot, update);
+        String checkCommand = inMsg.split(" ")[0].toLowerCase().replaceAll("\\s+", " ");
+        if(commands.containsKey(checkCommand)) {
+            System.out.println("Команда распознана: " + checkCommand);
+            commands.get(checkCommand).doCommand(bot, update);
             return true;
         } else {
 
