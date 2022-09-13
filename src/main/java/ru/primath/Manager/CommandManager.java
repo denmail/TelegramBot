@@ -47,7 +47,7 @@ public class CommandManager {
             System.out.println("Команда распознана: " + checkCommand);
             commands.get(checkCommand).doCommand(bot, update);
             try {
-                FileWriter writer = new FileWriter("src/main/java/ru/primath/log/log.txt", true);
+                FileWriter writer = new FileWriter("src/main/resources/log.txt", true);
                 LocalTime now = LocalTime.now();
                 writer.write(now.format(DateTimeFormatter.ISO_TIME) + "] Команда распознана: " + checkCommand);
                 writer.append('\n');
