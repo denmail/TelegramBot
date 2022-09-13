@@ -1,10 +1,19 @@
 package ru.primath.Manager;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import ru.primath.Command.*;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class CommandManager {
@@ -37,6 +46,19 @@ public class CommandManager {
         if(commands.containsKey(checkCommand)) {
             System.out.println("Команда распознана: " + checkCommand);
             commands.get(checkCommand).doCommand(bot, update);
+            try {
+                FileWriter writer = new FileWriter("src/main/java/ru/primath/log/log.txt", true);
+                LocalTime now = LocalTime.now();
+                writer.write(now.format(DateTimeFormatter.ISO_TIME) + "] Команда распознана: " + checkCommand);
+                writer.append('\n');
+                writer.write(update.getMessage().getFrom().getUserName());
+                writer.append('\n');
+                writer.flush();
+                writer.close();
+                System.out.println("SAVED");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return true;
         } else {
 
