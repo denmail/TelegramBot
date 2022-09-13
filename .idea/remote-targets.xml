@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteTargetsManager">
+    <targets>
+      <target name="root@185.133.42.100:22" type="ssh/sftp" uuid="bb5cdb1b-5395-4690-8974-4fe4f2c79010">
+        <config>
+          <option name="projectRootOnTarget" value="/root/tele-bot" />
+          <option name="serverName" value="root@185.133.42.100:22 password" />
+        </config>
+        <ContributedStateBase type="JavaLanguageRuntime">
+          <config>
+            <option name="homePath" value="/usr/lib/jvm/java-17-openjdk-amd64" />
+            <option name="javaVersionString" value="17.0.4" />
+          </config>
+        </ContributedStateBase>
+      </target>
+    </targets>
+  </component>
+</project>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="primath" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="primath">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/telebot/tele-bot" local="$PROJECT_DIR$" web="z33237.adman.cloud" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

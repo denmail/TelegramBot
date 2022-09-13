@@ -9,9 +9,9 @@ import java.util.logging.Logger;
 
 public class DBManager {
 
-    static String url = "jdbc:postgresql://localhost:5432/primath_DB";
-    static String user = "postgres";
-    static String password = "Try2HackMe";
+    static String url = "jdbc:mysql://localhost:5432/primath_db";
+    static String user = "admin";
+    static String password = "admin";
 
 
 
