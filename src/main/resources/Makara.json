@@ -1,9 +1,18 @@
 {
   "wostarnn": {
+    "subGroup": 1,
     "username": "wostarnn",
     "name": "David",
     "chatId": 796496528,
+    "role": "Primat",
+    "feedbackMessage": false
+  },
+  "start": {
     "subGroup": 1,
-    "role": "Admin"
+    "username": "start",
+    "name": "David",
+    "chatId": 796496528,
+    "role": "Admin",
+    "feedbackMessage": false
   }
 }

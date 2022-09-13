@@ -9,14 +9,12 @@ public class Primat {
     private Long chatId;
     private String role;
 
-    private boolean feedbackMessage;
     public Primat(User user, int subGroup, String role) {
         this.username = user.getUserName();
         this.name = user.getFirstName();
         this.chatId = user.getId();
         this.subGroup = subGroup;
         this.role = role;
-        this.feedbackMessage = false;
     }
 
     public Primat(String role) {
@@ -43,11 +41,4 @@ public class Primat {
         return role;
     }
 
-    public boolean isFeedbackMessage() {
-        return feedbackMessage;
-    }
-
-    public void setFeedbackMessage(boolean feedbackMessage) {
-        this.feedbackMessage = feedbackMessage;
-    }
 }

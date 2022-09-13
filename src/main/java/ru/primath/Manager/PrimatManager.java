@@ -26,7 +26,7 @@ public class PrimatManager {
             Primat primat = Makara.get(username);
            return primat;
         }
-        return new Primat("Denied");
+        return null;
     }
 
     public static void saveMakara() {
