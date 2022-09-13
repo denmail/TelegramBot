@@ -32,7 +32,7 @@ public class ScheduleManager {
         int c = noCouple-1, d = day, w = week, g = group-1;
         System.out.printf("%d, %d, %d, %d\n", g, w, d, c);
         System.out.println("w="+w);
-        if(c > 3){
+        if(c >= 3){
             c = 0;
             d++;
         }

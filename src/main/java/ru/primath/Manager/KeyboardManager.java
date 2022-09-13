@@ -23,7 +23,6 @@ public class KeyboardManager extends KeyboardButton {
         // Создаем список строк клавиатуры
         List<KeyboardRow> keyboard = new ArrayList<>();
 
-        // Добавляем кнопки в первую строчку клавиатуры
         KeyboardButton kb1 = new KeyboardButton();
         kb1.setText("Числитель/Знаменатель");
         KeyboardButton kb2 = new KeyboardButton();
