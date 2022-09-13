@@ -22,5 +22,13 @@
     "chatId": 929016294,
     "role": "Leader",
     "feedbackMessage": false
+  },
+  "ponchikovv": {
+    "subGroup": 2,
+    "username": "ponchikovv",
+    "name": "Дарья",
+    "chatId": 469392938,
+    "role": "Primat",
+    "feedbackMessage": false
   }
 }

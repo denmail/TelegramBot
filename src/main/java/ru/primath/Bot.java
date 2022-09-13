@@ -15,6 +15,7 @@ public final class Bot extends TelegramLongPollingBot {
         super();
         this.BOT_NAME = botName;
         this.BOT_TOKEN = botToken;
+        System.out.println(botName);
         PrimatManager.loadMakara();
         ScheduleManager sm = new ScheduleManager();
     }
