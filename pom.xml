@@ -91,7 +91,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>fully.qualified.MainClass</mainClass>
+                            <mainClass>ru.primath.TelebotApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
