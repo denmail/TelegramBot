@@ -17,7 +17,7 @@ import java.util.List;
 
 public class MessageManager {
 
-    private static final String primat_photo = "src/main/resources/images/Primat.jpg";
+    private static final String primat_photo = "src/main/resources/images/primat.jpg";
     private static final String menu_photo = "src/main/resources/images/menu.jpg";
     private static final String registerAccepted_photo = "src/main/resources/images/registerAccepted.jpg";
     private static final String registerAborted_photo = "src/main/resources/images/registerAborted.jpg";
@@ -184,48 +184,5 @@ public class MessageManager {
         dayScheduleMessage.setChatId(chatId);
         dayScheduleMessage.setText(msg);
         return dayScheduleMessage;
-    }
-
-    public static SendMessage feedbackMessage(Long chatId) {
-        SendMessage feedbackMessage = new SendMessage();
-        feedbackMessage.setText("С кем нужно связаться?");
-        feedbackMessage.setChatId(chatId);
-
-        InlineKeyboardButton feedbackButton1 = new InlineKeyboardButton();
-        feedbackButton1.setText("Староста");
-        feedbackButton1.setCallbackData("FeedbackLeader");
-
-        InlineKeyboardButton feedbackButton2 = new InlineKeyboardButton();
-        feedbackButton2.setText("Администрация");
-        feedbackButton2.setCallbackData("FeedbackAdministration");
-        List<InlineKeyboardButton> feedbackRow1 = new ArrayList<>();
-        feedbackRow1.add(feedbackButton1);
-        feedbackRow1.add(feedbackButton2);
-
-        List<List<InlineKeyboardButton>> feedbackKeyboard = new ArrayList<>();
-        feedbackKeyboard.add(feedbackRow1);
-
-        InlineKeyboardMarkup feedbackKeyboardMarkup = new InlineKeyboardMarkup();
-        feedbackKeyboardMarkup.setKeyboard(feedbackKeyboard);
-
-        feedbackMessage.setReplyMarkup(feedbackKeyboardMarkup);
-        return feedbackMessage;
-    }
-
-    public static SendMessage sendFeedbackMessage(Primat primat) {
-        SendMessage sendFeedbackMessage = new SendMessage();
-        sendFeedbackMessage.setText("Введите ваше сообщение:");
-        sendFeedbackMessage.setChatId(primat.getChatId());
-        primat.setFeedbackMessage(true);
-        return sendFeedbackMessage;
-    }
-
-    public static SendMessage feedbackReplyMessage(Long chatId, String message) {
-        SendMessage feedbackReplyMessage = new SendMessage();
-        feedbackReplyMessage.setChatId(chatId);
-        feedbackReplyMessage.setText("Дублирую сообщение:\n\n" + message);
-        KeyboardManager keyboardManager = new KeyboardManager();
-        keyboardManager.setButtons(feedbackReplyMessage);
-        return feedbackReplyMessage;
     }
 }

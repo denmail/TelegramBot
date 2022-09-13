@@ -29,8 +29,6 @@ public final class Bot extends TelegramLongPollingBot {
     public String getBotUsername() {
         return BOT_NAME;
     }
-    //я ЕБАЛ
-    //мать гита
     @Override
     public void onUpdateReceived(Update update) {
         try {
@@ -39,14 +37,6 @@ public final class Bot extends TelegramLongPollingBot {
                 InlineManager.checkCallbackQueryData(queryData, this, update);
             } else if (update.hasMessage() && update.getMessage().hasText()) {
                 Message inMessage = update.getMessage();
-                Primat checkPrimat = PrimatManager.getPrimat(update.getMessage().getFrom().getUserName());
-                if (checkPrimat != null) {
-                    if (checkPrimat.isFeedbackMessage()) {
-                        checkPrimat.setFeedbackMessage(false);
-                        execute(MessageManager.feedbackReplyMessage(checkPrimat.getChatId(),inMessage.getText()));
-                        return;
-                    }
-                }
                 cm.findCommand(inMessage.getText(), this, update);
             }
         } catch (TelegramApiException e) {

@@ -1,6 +1,5 @@
 package ru.primath.Manager;
 
-import ru.primath.Command.FeedbackCommand;
 import ru.primath.Command.GoFuckYourselfCommand;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.bots.AbsSender;
@@ -17,11 +16,6 @@ public class InlineManager {
             GoFuckYourselfCommand.fuckReply(bot, update);
             return;
 
-        }
-
-        if (queryData.contains("Feedback")) {
-            FeedbackCommand.setupReply(bot, update);
-            return;
         }
 
         System.out.println("Ты не должен был здесь оказаться...");

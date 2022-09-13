@@ -19,6 +19,10 @@ public class Primat {
         this.feedbackMessage = false;
     }
 
+    public Primat(String role) {
+        this.role = role;
+    }
+
     public String getUsername() {
         return username;
     }

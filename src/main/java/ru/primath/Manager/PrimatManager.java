@@ -12,6 +12,7 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Map;
 
 public class PrimatManager {
     private static HashMap<String, Primat> Makara = new HashMap<>();
@@ -21,11 +22,11 @@ public class PrimatManager {
     }
 
     public static Primat getPrimat(String username) {
-        if (Makara.containsKey(username)) {
+        if (Makara.isEmpty()) {
             Primat primat = Makara.get(username);
            return primat;
         }
-        return null;
+        return new Primat("Denied");
     }
 
     public static void saveMakara() {

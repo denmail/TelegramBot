@@ -1,34 +1,9 @@
 {
   "wostarnn": {
-    "subGroup": 1,
     "username": "wostarnn",
     "name": "David",
     "chatId": 796496528,
-    "role": "Primat",
-    "feedbackMessage": false
-  },
-  "Wanderer_Of_Darkness": {
-    "subGroup": 2,
-    "username": "Wanderer_Of_Darkness",
-    "name": "Helheim",
-    "chatId": 1201029667,
-    "role": "Primat",
-    "feedbackMessage": false
-  },
-  "deekod": {
-    "subGroup": 2,
-    "username": "deekod",
-    "name": "Denis",
-    "chatId": 929016294,
-    "role": "Leader",
-    "feedbackMessage": false
-  },
-  "ponchikovv": {
-    "subGroup": 2,
-    "username": "ponchikovv",
-    "name": "Дарья",
-    "chatId": 469392938,
-    "role": "Primat",
-    "feedbackMessage": false
+    "subGroup": 1,
+    "role": "Admin"
   }
 }
