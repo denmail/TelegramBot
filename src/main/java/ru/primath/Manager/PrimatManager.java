@@ -22,7 +22,7 @@ public class PrimatManager {
     }
 
     public static Primat getPrimat(String username) {
-        if (Makara.isEmpty()) {
+        if (Makara.containsKey(username)) {
             Primat primat = Makara.get(username);
            return primat;
         }

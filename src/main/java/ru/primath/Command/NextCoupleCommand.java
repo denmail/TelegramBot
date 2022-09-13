@@ -31,6 +31,7 @@ public class NextCoupleCommand extends Command{
     @Override
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
         Date date = new Date();
+        System.out.println(update.getMessage().getFrom().getUserName());
         Primat primat = PrimatManager.getPrimat(update.getMessage().getFrom().getUserName());
         System.out.println(primat.getSubGroup());
         Couple couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date), getNextCouple());
