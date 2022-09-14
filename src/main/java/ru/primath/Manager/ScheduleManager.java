@@ -90,6 +90,7 @@ public class ScheduleManager {
         if (day == 6) {
             day = 0;
         }
+        System.out.println(getCurrentTimeFlag() + 4 * (day - 1));
         return (byte) (getCurrentTimeFlag() + 4 * (day - 1));
     }
     private static boolean isDenominator() {

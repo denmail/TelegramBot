@@ -35,33 +35,4 @@ public class NextCoupleCommand extends Command{
         NewCouple couple = ScheduleManager.getNextCouple(primat);
         bot.execute(MessageManager.nextCoupleMessage(primat.getChatId(), couple));
     }
-    private int isOdd(Date date) {
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        return calendar.get(Calendar.WEEK_OF_MONTH) % 2;
-    }
-    private int getDay(Date date) {
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        return (calendar.get(Calendar.DAY_OF_WEEK) + 5)%7;
-    }
-    private int getNextCouple() {
-        LocalTime now = LocalTime.now();
-        if (now.isBefore(c1b)) {
-            System.out.println("r1");
-            return 1;
-        } else if (now.isBefore(c2b)) {
-            System.out.println("r2");
-            return 2;
-        } else if (now.isBefore(c3b)) {
-            System.out.println("r3");
-            return 3;
-        } else if (now.isBefore(c4e)) {
-            System.out.println("r4");
-            return 4;
-        } else{
-            System.out.println("r4");
-            return 5;
-        }
-    }
 }
