@@ -20,33 +20,6 @@ public class WScheduleCommand extends Command{
 
     @Override
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
-        Date date = new Date();
-        String[] days = {"Понедельник", "Вторник", "Среда", "Четверг", "Пятница"};
-        Primat primat = PrimatManager.getPrimat(update.getMessage().getFrom().getUserName());
-        String msg = "Расписание на неделю:\n\n";
 
-        bot.execute(MessageManager.scheduleMessage(primat.getChatId(), msg));
-        for (int i = 0; i < 5; i++) {
-            msg = days[i]+":\n\n";
-            for (int j = 1; j <= 4; j++) {
-                Couple couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), i, j);
-                if(couple.name.contains("none")){
-                    msg += String.format("%d: --\n", j);
-                } else {
-                    msg += String.format("%d: %s в %s\n", j, couple.name, couple.office);
-                }
-            }
-            bot.execute(MessageManager.scheduleMessage(primat.getChatId(), msg));
-        }
-    }
-    private int isOdd(Date date) {
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        return calendar.get(Calendar.WEEK_OF_MONTH) % 2;
-    }
-    private int getDay(Date date) {
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        return (calendar.get(Calendar.DAY_OF_WEEK) + 5)%7;
     }
 }
