@@ -5,6 +5,8 @@ import ru.primath.Objects.Schedule.Schedule;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -19,10 +21,12 @@ public class ScheduleManager {
 
     public void readSchedule(){
         try {
-            BufferedReader reader = Files.newBufferedReader(Paths.get("src/main/resources/Schedule.json"));
+            FileReader fr = new FileReader("src/main/resources/Schedule.json");
+            BufferedReader reader = new BufferedReader(fr));
             Gson gson = new Gson();
             schedule = gson.fromJson(reader, Schedule.class);
             reader.close();
+            fr.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
