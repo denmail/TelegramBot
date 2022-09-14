@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class DBManager {
 
     static String url = "jdbc:mysql://localhost/primath_db";
-    static String user = "mysqlG";
+    static String user = "admin";
     static String password = "admin";
 
 
