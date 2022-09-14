@@ -49,9 +49,11 @@ public class ScheduleManager {
     public static NewCouple getNextCouple(Primat primat) {
         byte id = getCurrentCoupleId();
         NewCouple couple = getFromSchedule(getMapName(primat.getSubGroup()), id);
+        System.out.println("para?");
         while (couple.getTitle().equals("none")) {
             id++;
             id %= 21;
+            couple = getFromSchedule(getMapName(primat.getSubGroup()), id);
         }
         couple.id = id;
         return couple;
@@ -88,7 +90,6 @@ public class ScheduleManager {
         if (day == 6) {
             day = 0;
         }
-        System.out.println(getCurrentTimeFlag() + 4 * (day - 1));
         return (byte) (getCurrentTimeFlag() + 4 * (day - 1));
     }
     private static boolean isDenominator() {
