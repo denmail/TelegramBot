@@ -18,14 +18,14 @@ import java.util.List;
 
 public class MessageManager {
 
-    private static final String primat_photo = "src/main/resources/images/primat.jpg";
-    private static final String menu_photo = "src/main/resources/images/menu.jpg";
-    private static final String registerAccepted_photo = "src/main/resources/images/registerAccepted.jpg";
-    private static final String registerAborted_photo = "src/main/resources/images/registerAborted.jpg";
+    private static final String primat_photo = "AgACAgIAAxkBAAIR4GMiUFNKMPCocUw_SNJ1kG-PrLGzAALhwTEbSpURSWcKy9YLiGcFAQADAgADeQADKQQ";
+    private static final String menu_photo = "AgACAgIAAxkBAAIR3GMiUEzsI8AduKyttnnV9NwEppbNAALfwTEbSpURSaNKTQeawxVzAQADAgADeQADKQQ";
+    private static final String registerAccepted_photo = "AgACAgIAAxkBAAIR3mMiUFARoG6OcB30Khj5H0YbAnpTAALgwTEbSpURSRfk0bXl52J2AQADAgADeAADKQQ";
+    private static final String registerAborted_photo = "AgACAgIAAxkBAAIR4mMiUFa5hnMRbhA5ZPFNxFidQrIiAALiwTEbSpURSW8nql5n_cmaAQADAgADeQADKQQ";
 
     public static SendPhoto startPhoto(Long chatId) {
         SendPhoto sendPhoto = new SendPhoto();
-        sendPhoto.setPhoto(new InputFile(new File(primat_photo)));
+        sendPhoto.setPhoto(new InputFile(primat_photo));
         sendPhoto.setChatId(chatId);
         KeyboardManager keyboardManager = new KeyboardManager();
         keyboardManager.setButtons(sendPhoto);
@@ -63,7 +63,7 @@ public class MessageManager {
     public static SendPhoto menuMessage(Long chatId) {
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setCaption("Меню (не придумал пока)");
-        sendPhoto.setPhoto(new InputFile(new File(menu_photo)));
+        sendPhoto.setPhoto(new InputFile(menu_photo));
         sendPhoto.setChatId(chatId);
         KeyboardManager keyboardManager = new KeyboardManager();
         keyboardManager.setButtons(sendPhoto);
@@ -93,11 +93,11 @@ public class MessageManager {
             Primat primat = new Primat(user, (byte)(data.contains("1") ? 1 : 2), "Primat");
             DBManager.primatToDB(primat.getSubGroup(), primat.getUsername(), primat.getName(), primat.getChatId(), primat.getRole());
             PrimatManager.addPrimat(primat);
-            registerPhoto.setPhoto(new InputFile(new File(registerAccepted_photo)));
+            registerPhoto.setPhoto(new InputFile(registerAccepted_photo));
             registerPhoto.setCaption("Добро пожаловать в отряд приматов");
 
         } else {
-            registerPhoto.setPhoto(new InputFile(new File(registerAborted_photo)));
+            registerPhoto.setPhoto(new InputFile(registerAborted_photo));
             registerPhoto.setCaption("Без обид, но ты и так уже примат\n(Сменить ориентацию можно в Настройках)");
         }
         return registerPhoto;
