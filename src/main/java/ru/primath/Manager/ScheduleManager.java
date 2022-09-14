@@ -11,7 +11,6 @@ import java.nio.file.Paths;
 
 public class ScheduleManager {
     static Schedule schedule;
-    BufferedReader reader;
 
     public ScheduleManager() {
         schedule = new Schedule();
@@ -20,9 +19,10 @@ public class ScheduleManager {
 
     public void readSchedule(){
         try {
-            reader = Files.newBufferedReader(Paths.get("src/main/resources/Schedule.json"));
+            BufferedReader reader = Files.newBufferedReader(Paths.get("src/main/resources/Schedule.json"));
             Gson gson = new Gson();
             schedule = gson.fromJson(reader, Schedule.class);
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -31,7 +31,6 @@ public final class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         try {
-            System.out.println("update");
             if (update.hasCallbackQuery()) {
                 String queryData = update.getCallbackQuery().getData();
                 InlineManager.checkCallbackQueryData(queryData, this, update);
