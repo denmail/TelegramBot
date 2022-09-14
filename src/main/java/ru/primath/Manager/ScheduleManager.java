@@ -22,7 +22,7 @@ public class ScheduleManager {
     public void readSchedule(){
         try {
             FileReader fr = new FileReader("src/main/resources/Schedule.json");
-            BufferedReader reader = new BufferedReader(fr));
+            BufferedReader reader = new BufferedReader(fr);
             Gson gson = new Gson();
             schedule = gson.fromJson(reader, Schedule.class);
             reader.close();
