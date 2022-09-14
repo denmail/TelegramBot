@@ -64,7 +64,6 @@ public class DBManager {
                 ScheduleManager.addToSchedule(table, id, couple);
             }
             System.out.println(table + " LOADED FROM DB");
-
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(TelebotApplication.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);

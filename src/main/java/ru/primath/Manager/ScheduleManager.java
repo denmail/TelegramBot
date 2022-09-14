@@ -32,8 +32,6 @@ public class ScheduleManager {
     private static HashMap<String, HashMap<Byte, NewCouple>> newSchedule = new HashMap<>();
 
     public ScheduleManager() {
-        //schedule = new Schedule();
-        //readSchedule();
         newSchedule.put("firstDenominator", new HashMap<>());
         newSchedule.put("firstNumerator", new HashMap<>());
         newSchedule.put("secondDenominator", new HashMap<>());
@@ -113,23 +111,5 @@ public class ScheduleManager {
                 return "secondNumerator";
             }
         }
-    }
-
-    public static Couple getCouple(int group, int week, int day, int noCouple){
-        int c = noCouple-1, d = day, w = week, g = group-1;
-        System.out.printf("%d, %d, %d, %d\n", g, w, d, c);
-        System.out.println("w="+w);
-        if(c > 3){
-            c = 0;
-            d++;
-        }
-        if(d > 4) {
-            d = 0;
-            w++;
-        }
-        w %= 2;
-        System.out.printf("%d, %d, %d, %d\n", g, w, d, c);
-        System.out.println(schedule.groups.get(g).weeks.get(w).days.get(d).couples.get(c).name);
-        return schedule.groups.get(g).weeks.get(w).days.get(d).couples.get(c);
     }
 }
