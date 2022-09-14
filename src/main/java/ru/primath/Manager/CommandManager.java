@@ -29,6 +29,7 @@ public class CommandManager {
         MenuCommand menuCommand = new MenuCommand("меню");
         DScheduleCommand dScheduleCommand = new DScheduleCommand("день");
         WScheduleCommand wScheduleCommand = new WScheduleCommand("неделя");
+        MenuuCommand menuuCommand = new MenuuCommand("менюю");
 
     }
 
@@ -46,19 +47,6 @@ public class CommandManager {
         if(commands.containsKey(checkCommand)) {
             System.out.println("Команда распознана: " + checkCommand);
             commands.get(checkCommand).doCommand(bot, update);
-            try {
-                FileWriter writer = new FileWriter("src/main/resources/log.txt", true);
-                LocalTime now = LocalTime.now();
-                writer.write(now.format(DateTimeFormatter.ISO_TIME) + "] Команда распознана: " + checkCommand);
-                writer.append('\n');
-                writer.write(update.getMessage().getFrom().getUserName());
-                writer.append('\n');
-                writer.flush();
-                writer.close();
-                System.out.println("SAVED");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
             return true;
         } else {
 
