@@ -37,15 +37,15 @@ public class DBManager {
         try (Connection con = DriverManager.getConnection(url, user, password);
              PreparedStatement pst = con.prepareStatement("SELECT * FROM makara");
              ResultSet rs = pst.executeQuery()) {
-            /*while (rs.next()) {
+            while (rs.next()) {
                 Primat primat = new Primat(rs.getByte(2),
                         rs.getString(1),
                         rs.getString(3),
                         rs.getLong(4),
                         rs.getString(5));
                 PrimatManager.addPrimat(primat);
-            }*/
-            System.out.println("DATATATATA");
+            }
+            System.out.println("LoadFromDB");
 
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(TelebotApplication.class.getName());
