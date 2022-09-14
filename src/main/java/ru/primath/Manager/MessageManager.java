@@ -190,7 +190,7 @@ public class MessageManager {
 
     public static SendMessage scheduleMessage(Primat primat, int day, boolean isWeek) {
         String[] days = {"Понедельник", "Вторник", "Среду", "Четверг", "Пятницу"};
-        String text = String.format("Расписание на %s\n\n", days[day]);
+        String text = String.format("Расписание на %s\n\n", days[day-1]);
 
         ArrayList<NewCouple> couples;
         if (isWeek) {
@@ -199,7 +199,11 @@ public class MessageManager {
             couples = ScheduleManager.getSmartCouplesForDay(primat, day);
         }
         for (NewCouple couple: couples) {
-            text += String.format("%s в %s\n", couple.getTitle(), couple.getAud());
+            if (couple.getTitle().equals("none")) {
+                text += "--\n\n";
+            } else {
+                text += String.format("%s в %s\n\n", couple.getTitle(), couple.getAud());
+            }
         }
 
         SendMessage dayScheduleMessage = new SendMessage();
