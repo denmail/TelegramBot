@@ -17,19 +17,19 @@ import java.util.List;
 
 public class ScheduleManager {
     static Schedule schedule;
-    private static HashMap<String, ArrayList<NewCouple>> newSchedule = new HashMap<>();
+    private static HashMap<String, HashMap<Byte, NewCouple>> newSchedule = new HashMap<>();
 
     public ScheduleManager() {
         //schedule = new Schedule();
         //readSchedule();
-        newSchedule.put("firstDenominator", new ArrayList<>());
-        newSchedule.put("firstNumerator", new ArrayList<>());
-        newSchedule.put("secondDenominator", new ArrayList<>());
-        newSchedule.put("secondNumerator", new ArrayList<>());
+        newSchedule.put("firstDenominator", new HashMap<>());
+        newSchedule.put("firstNumerator", new HashMap<>());
+        newSchedule.put("secondDenominator", new HashMap<>());
+        newSchedule.put("secondNumerator", new HashMap<>());
     }
 
     public static void addToSchedule(String map, Byte id, NewCouple couple) {
-        newSchedule.get(map).add(id,couple);
+        newSchedule.get(map).put(id,couple);
     }
 
     public static NewCouple getFromSchedule(String map, Byte id) {
