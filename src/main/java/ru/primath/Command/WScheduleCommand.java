@@ -22,7 +22,7 @@ public class WScheduleCommand extends Command{
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
         Primat primat = PrimatManager.getPrimat(update.getMessage().getFrom().getUserName());
         for (int day = 1; day <= 5; day++) {
-            bot.execute(MessageManager.dayScheduleMessage(primat, day));
+            bot.execute(MessageManager.dayScheduleMessage(primat, day, true));
         }
     }
 }

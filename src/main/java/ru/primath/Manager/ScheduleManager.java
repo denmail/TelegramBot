@@ -45,16 +45,21 @@ public class ScheduleManager {
 
     public static ArrayList<NewCouple> getCouplesForDay(Primat primat, int day) {
         ArrayList<NewCouple> couples = new ArrayList<>();
+
+        for (int i = 1; i <= 4; i++) {
+            couples.add(getCouple(primat, (byte) (i + (day - 1) * 4)));
+        }
+        return couples;
+    }
+
+    public static ArrayList<NewCouple> getSmartCouplesForDay(Primat primat, int day) {
         if (getCurrentTimeFlag() == 4) {
             day++;
             if (day == 6) {
                 day = 1;
             }
         }
-        for (int i = 1; i <= 4; i++) {
-            couples.add(getCouple(primat, (byte) (i + (day - 1) * 4)));
-        }
-        return couples;
+        return getCouplesForDay(primat, day);
     }
 
     public static NewCouple getCouple(Primat primat, byte id) {
