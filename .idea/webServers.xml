@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="67212984-59d0-47f9-9320-bf07ca6d23aa" name="primath">
-        <fileTransfer rootFolder="/root" accessType="SFTP" host="185.133.42.100" port="22" sshConfigId="4d958233-9984-4208-a438-b58b3d391fe0" sshConfig="root@185.133.42.100:22 password">
+        <fileTransfer rootFolder="/root" accessType="SFTP" sshConfigId="4d958233-9984-4208-a438-b58b3d391fe0" sshConfig="root@185.133.42.100:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
