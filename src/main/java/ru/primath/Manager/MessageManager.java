@@ -69,6 +69,15 @@ public class MessageManager {
         return sendPhoto;
     }
 
+    public static SendMessage menuuMessage(Long chatId) {
+        SendMessage menuMessage = new SendMessage();
+        menuMessage.setText("Меню (не придумал пока)");
+        menuMessage.setChatId(chatId);
+        KeyboardManager keyboardManager = new KeyboardManager();
+        keyboardManager.setButtons(menuMessage);
+        return menuMessage;
+    }
+
     public static SendPhoto registerPhoto(CallbackQuery callbackQuery) {
         SendPhoto registerPhoto = new SendPhoto();
 

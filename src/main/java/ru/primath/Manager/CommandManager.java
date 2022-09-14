@@ -29,6 +29,7 @@ public class CommandManager {
         MenuCommand menuCommand = new MenuCommand("меню");
         DScheduleCommand dScheduleCommand = new DScheduleCommand("день");
         WScheduleCommand wScheduleCommand = new WScheduleCommand("неделя");
+        MenuuCommand menuuCommand = new MenuuCommand("менюю");
 
     }
 
