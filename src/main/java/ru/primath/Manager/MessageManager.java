@@ -1,5 +1,6 @@
 package ru.primath.Manager;
 
+import ru.primath.Objects.NewCouple;
 import ru.primath.Objects.Primat;
 import ru.primath.Objects.Schedule.Couple;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -171,10 +172,10 @@ public class MessageManager {
         return fuckMessageToReceiver;
     }
 
-    public static SendMessage nextCoupleMessage(Long chatId, Couple couple) {
+    public static SendMessage nextCoupleMessage(Long chatId, NewCouple couple) {
         SendMessage nextCoupleMessage = new SendMessage();
         nextCoupleMessage.setChatId(chatId);
-        nextCoupleMessage.setText(String.format("%s в %s, не потеряйся!", couple.name, couple.office));
+        nextCoupleMessage.setText(String.format("%s в %s, не потеряйся!", couple.getTitle(), couple.getAud()));
         return nextCoupleMessage;
     }
 

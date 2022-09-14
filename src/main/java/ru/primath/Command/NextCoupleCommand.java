@@ -3,6 +3,7 @@ package ru.primath.Command;
 import ru.primath.Manager.MessageManager;
 import ru.primath.Manager.PrimatManager;
 import ru.primath.Manager.ScheduleManager;
+import ru.primath.Objects.NewCouple;
 import ru.primath.Objects.Primat;
 import ru.primath.Objects.Schedule.Couple;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -30,15 +31,9 @@ public class NextCoupleCommand extends Command{
 
     @Override
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
-        Date date = new Date();
-        System.out.println(update.getMessage().getFrom().getUserName());
         Primat primat = PrimatManager.getPrimat(update.getMessage().getFrom().getUserName());
-        System.out.println(primat.getSubGroup());
-        Couple couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date), getNextCouple());
-        if(couple.name.contains("none")) {
-            couple = ScheduleManager.getCouple(primat.getSubGroup(), isOdd(date), getDay(date), getNextCouple());
-        }
-        bot.execute(MessageManager.nextCoupleMessage(update.getMessage().getChatId(), couple));
+        NewCouple couple = ScheduleManager.getNextCouple(primat);
+        bot.execute(MessageManager.nextCoupleMessage(primat.getChatId(), couple));
     }
     private int isOdd(Date date) {
         Calendar calendar = new GregorianCalendar();
