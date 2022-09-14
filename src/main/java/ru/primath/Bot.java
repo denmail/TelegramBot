@@ -16,7 +16,12 @@ public final class Bot extends TelegramLongPollingBot {
         this.BOT_TOKEN = botToken;
         System.out.println(botName);
         ScheduleManager sm = new ScheduleManager();
+        DBManager.loadScheduleFromDB("firstDenominator");
+        DBManager.loadScheduleFromDB("firstNumerator");
+        DBManager.loadScheduleFromDB("secondDenominator");
+        DBManager.loadScheduleFromDB("secondNumerator");
         DBManager.loadPrimatsFromDB();
+        System.out.println(ScheduleManager.getFromSchedule("firstNumerator", (byte) 11).getTitle());
     }
 
     @Override

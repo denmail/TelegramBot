@@ -1,5 +1,6 @@
 package ru.primath.Manager;
 
+import ru.primath.Objects.NewCouple;
 import ru.primath.Objects.Schedule.Couple;
 import ru.primath.Objects.Schedule.Schedule;
 import com.google.gson.Gson;
@@ -10,13 +11,29 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class ScheduleManager {
     static Schedule schedule;
+    private static HashMap<String, ArrayList<NewCouple>> newSchedule = new HashMap<>();
 
     public ScheduleManager() {
-        schedule = new Schedule();
-        readSchedule();
+        //schedule = new Schedule();
+        //readSchedule();
+        newSchedule.put("firstDenominator", new ArrayList<>());
+        newSchedule.put("firstNumerator", new ArrayList<>());
+        newSchedule.put("secondDenominator", new ArrayList<>());
+        newSchedule.put("secondNumerator", new ArrayList<>());
+    }
+
+    public static void addToSchedule(String map, Byte id, NewCouple couple) {
+        newSchedule.get(map).add(id,couple);
+    }
+
+    public static NewCouple getFromSchedule(String map, Byte id) {
+        return newSchedule.get(map).get(id);
     }
 
     public void readSchedule(){

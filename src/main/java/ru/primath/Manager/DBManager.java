@@ -1,5 +1,6 @@
 package ru.primath.Manager;
 
+import ru.primath.Objects.NewCouple;
 import ru.primath.Objects.Primat;
 import ru.primath.TelebotApplication;
 
@@ -45,7 +46,7 @@ public class DBManager {
                         rs.getString(5));
                 PrimatManager.addPrimat(primat);
             }
-            System.out.println("LOADED FROM DB");
+            System.out.println("MAKARA LOADED FROM DB");
 
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(TelebotApplication.class.getName());
@@ -53,5 +54,21 @@ public class DBManager {
         }
     }
 
+    public static void loadScheduleFromDB(String table) {
+        try (Connection con = DriverManager.getConnection(url, user, password);
+             PreparedStatement pst = con.prepareStatement("SELECT * FROM " + table);
+             ResultSet rs = pst.executeQuery()) {
+            while (rs.next()) {
+                Byte id = rs.getByte(1);
+                NewCouple couple = new NewCouple(rs.getString(2), rs.getString(3));
+                ScheduleManager.addToSchedule(table, id, couple);
+            }
+            System.out.println(table + " LOADED FROM DB");
+
+        } catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(TelebotApplication.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
 
 }
