@@ -33,7 +33,6 @@ public class NextCoupleCommand extends Command{
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
         Primat primat = PrimatManager.getPrimat(update.getMessage().getFrom().getUserName());
         NewCouple couple = ScheduleManager.getNextCouple(primat);
-        System.out.println(couple.getTitle());
         bot.execute(MessageManager.nextCoupleMessage(primat.getChatId(), couple));
     }
 }

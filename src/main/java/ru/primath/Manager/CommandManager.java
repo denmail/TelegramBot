@@ -27,8 +27,8 @@ public class CommandManager {
         NextCoupleCommand nextCoupleCommand = new NextCoupleCommand("пара");
         ChooseScheduleCommand chooseScheduleCommand = new ChooseScheduleCommand("расписание");
         MenuCommand menuCommand = new MenuCommand("меню");
-        //DScheduleCommand dScheduleCommand = new DScheduleCommand("день");
-        //WScheduleCommand wScheduleCommand = new WScheduleCommand("неделя");
+        DScheduleCommand dScheduleCommand = new DScheduleCommand("день");
+        WScheduleCommand wScheduleCommand = new WScheduleCommand("неделя");
         MenuuCommand menuuCommand = new MenuuCommand("менюю");
 
     }

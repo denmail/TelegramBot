@@ -13,10 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
+import java.util.*;
 
 public class ScheduleManager {
 
@@ -46,14 +43,34 @@ public class ScheduleManager {
         return newSchedule.get(map).get(id);
     }
 
+    public static ArrayList<NewCouple> getCouplesForDay(Primat primat, int day) {
+        ArrayList<NewCouple> couples = new ArrayList<>();
+        if (getCurrentTimeFlag() == 4) {
+            day++;
+            if (day == 6) {
+                day = 1;
+            }
+        }
+        for (int i = 1; i <= 4; i++) {
+            couples.add(getCouple(primat, (byte) (i + (day - 1) * 4)));
+        }
+        return couples;
+    }
+
+    public static NewCouple getCouple(Primat primat, byte id) {
+        return getFromSchedule(getMapName(primat.getSubGroup()), id);
+    }
+
     public static NewCouple getNextCouple(Primat primat) {
-        byte id = getCurrentCoupleId();
-        NewCouple couple = getFromSchedule(getMapName(primat.getSubGroup()), id);
+        byte id = getNextCoupleId();
+        NewCouple couple = getCouple(primat, id);
         System.out.println("para?");
         while (couple.getTitle().equals("none")) {
             id++;
-            id %= 21;
-            couple = getFromSchedule(getMapName(primat.getSubGroup()), id);
+            if (id == 21) {
+                id = 1;
+            }
+            couple = getCouple(primat, id);
         }
         couple.id = id;
         return couple;
@@ -63,29 +80,29 @@ public class ScheduleManager {
         LocalTime now = LocalTime.now();
         if (now.isBefore(c1b)) {
             System.out.println("r1");
-            return 0;
+            return 1;
         } else if (now.isBefore(c2b)) {
             System.out.println("r2");
-            return 1;
+            return 2;
         } else if (now.isBefore(c3b)) {
             System.out.println("r3");
-            return 2;
+            return 3;
         } else if (now.isBefore(c4e)) {
             System.out.println("r4");
-            return 3;
+            return 4;
         } else{
             System.out.println("r4");
-            return 4;
+            return 5;
         }
     }
 
-    private static int getCurrentDay() {
+    public static int getCurrentDay() {
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(new Date());
         return (calendar.get(Calendar.DAY_OF_WEEK) + 6)%7;
     }
 
-    private static byte getCurrentCoupleId() {
+    private static byte getNextCoupleId() {
         int day = getCurrentDay();
         if (day == 6) {
             day = 0;

@@ -11,7 +11,7 @@ public class Command {
     public Command(String commandText) {
         CommandManager.register(commandText, this);
         this.commandText = commandText;
-        System.out.println(CommandManager.containsCommand(commandText));
+        System.out.println("Зарегистрирована: " + commandText);
     }
 
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {

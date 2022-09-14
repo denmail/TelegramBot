@@ -188,10 +188,18 @@ public class MessageManager {
         return chooseScheduleMessage;
     }
 
-    public static SendMessage scheduleMessage(Long chatId, String msg) {
+    public static SendMessage dayScheduleMessage(Primat primat, int day) {
+        String[] days = {"Понедельник", "Вторник", "Среду", "Четверг", "Пятницу"};
+        String text = String.format("Расписание на %s\n\n", days[day]);
+
+        ArrayList<NewCouple> couples = ScheduleManager.getCouplesForDay(primat, day);
+        for (NewCouple couple: couples) {
+            text += String.format("%s в %s\n", couple.getTitle(), couple.getAud());
+        }
+
         SendMessage dayScheduleMessage = new SendMessage();
-        dayScheduleMessage.setChatId(chatId);
-        dayScheduleMessage.setText(msg);
+        dayScheduleMessage.setText(text);
+        dayScheduleMessage.setChatId(primat.getChatId());
         return dayScheduleMessage;
     }
 }
