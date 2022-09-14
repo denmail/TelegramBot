@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class DBManager {
 
     static String url = "jdbc:mysql://localhost/primath_db";
-    static String user = "admin";
+    static String user = "mysqlG";
     static String password = "admin";
 
 
@@ -45,7 +45,7 @@ public class DBManager {
                         rs.getString(5));
                 PrimatManager.addPrimat(primat);
             }
-            System.out.println("LoadFromDB");
+            System.out.println("LOADED FROM DB");
 
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(TelebotApplication.class.getName());
