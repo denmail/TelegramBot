@@ -42,9 +42,7 @@ public final class Bot extends TelegramLongPollingBot {
                 Message inMessage = update.getMessage();
                 cm.findCommand(inMessage.getText(), this, update);
             } else if (update.hasMessage() && update.getMessage().hasPhoto()) {
-                if (update.getMessage().hasText() && update.getMessage().getText().equals("Фото")) {
-                    PhotoManager.returnPhoto(this, update);
-                }
+                PhotoManager.returnPhoto(this, update);
             }
         } catch (TelegramApiException e) {
             e.printStackTrace();
