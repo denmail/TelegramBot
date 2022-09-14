@@ -25,6 +25,6 @@ public class DScheduleCommand extends Command {
     @Override
     public void doCommand(AbsSender bot, Update update) throws TelegramApiException {
         Primat primat = PrimatManager.getPrimat(update.getMessage().getFrom().getUserName());
-        bot.execute(MessageManager.dayScheduleMessage(primat, ScheduleManager.getCurrentDay(), false));
+        bot.execute(MessageManager.scheduleMessage(primat, ScheduleManager.getCurrentDay(), false));
     }
 }

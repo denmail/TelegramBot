@@ -188,7 +188,7 @@ public class MessageManager {
         return chooseScheduleMessage;
     }
 
-    public static SendMessage dayScheduleMessage(Primat primat, int day, boolean isWeek) {
+    public static SendMessage scheduleMessage(Primat primat, int day, boolean isWeek) {
         String[] days = {"Понедельник", "Вторник", "Среду", "Четверг", "Пятницу"};
         String text = String.format("Расписание на %s\n\n", days[day]);
 

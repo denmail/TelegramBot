@@ -53,7 +53,7 @@ public class ScheduleManager {
     }
 
     public static ArrayList<NewCouple> getSmartCouplesForDay(Primat primat, int day) {
-        if (getCurrentTimeFlag() == 4) {
+        if (getCurrentTimeFlag() == 5) {
             day++;
             if (day == 6) {
                 day = 1;
@@ -96,7 +96,7 @@ public class ScheduleManager {
             System.out.println("r4");
             return 4;
         } else{
-            System.out.println("r4");
+            System.out.println("r5");
             return 5;
         }
     }
