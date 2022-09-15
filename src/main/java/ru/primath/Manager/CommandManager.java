@@ -1,19 +1,9 @@
 package ru.primath.Manager;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import ru.primath.Command.*;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class CommandManager {
@@ -29,8 +19,8 @@ public class CommandManager {
         MenuCommand menuCommand = new MenuCommand("меню");
         DScheduleCommand dScheduleCommand = new DScheduleCommand("день");
         WScheduleCommand wScheduleCommand = new WScheduleCommand("неделя");
-        MenuuCommand menuuCommand = new MenuuCommand("менюю");
-
+        ProfileCommand profileCommand = new ProfileCommand("профиль");
+        UsefulCommand usefulCommand = new UsefulCommand("полезное");
     }
 
     public static boolean register(String commandName, Command command) {

@@ -38,7 +38,9 @@ public class KeyboardManager extends KeyboardButton {
         KeyboardButton kb3 = new KeyboardButton();
         kb3.setText("Пара");
         KeyboardButton kb4 = new KeyboardButton();
-        kb4.setText("Настройки");
+        kb4.setText("Профиль");
+        KeyboardButton kb5 = new KeyboardButton();
+        kb5.setText("Полезное");
 
         // Первая строчка клавиатуры
         KeyboardRow keyboardFirstRow = new KeyboardRow();
@@ -55,6 +57,7 @@ public class KeyboardManager extends KeyboardButton {
         KeyboardRow keyboardThirdRow = new KeyboardRow();
         // Добавляем кнопки в третью строчку клавиатуры
         keyboardThirdRow.add(kb4);
+        keyboardThirdRow.add(kb5);
 
         // Добавляем все строчки клавиатуры в список
         keyboard.add(keyboardFirstRow);

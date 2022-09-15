@@ -1,6 +1,6 @@
 package ru.primath.Manager;
 
-import ru.primath.Objects.NewCouple;
+import ru.primath.Objects.Couple;
 import ru.primath.Objects.Primat;
 import ru.primath.TelebotApplication;
 
@@ -60,7 +60,7 @@ public class DBManager {
              ResultSet rs = pst.executeQuery()) {
             while (rs.next()) {
                 Byte id = rs.getByte(1);
-                NewCouple couple = new NewCouple(rs.getString(2), rs.getString(3));
+                Couple couple = new Couple(rs.getString(2), rs.getString(3));
                 ScheduleManager.addToSchedule(table, id, couple);
             }
             System.out.println(table + " LOADED FROM DB");

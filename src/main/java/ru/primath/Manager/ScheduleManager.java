@@ -1,50 +1,35 @@
 package ru.primath.Manager;
 
-import ru.primath.Objects.NewCouple;
+import ru.primath.Objects.Couple;
 import ru.primath.Objects.Primat;
-import ru.primath.Objects.Schedule.Couple;
-import ru.primath.Objects.Schedule.Schedule;
-import com.google.gson.Gson;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalTime;
 import java.util.*;
 
 public class ScheduleManager {
+    private static final LocalTime c1b = LocalTime.parse("09:30:00");
+    private static final LocalTime c2b = LocalTime.parse("11:15:00");
+    private static final LocalTime c3b = LocalTime.parse("13:35:00");
+    private static final LocalTime c4b = LocalTime.parse("15:20:00");
 
-    private static LocalTime c1b = LocalTime.parse("09:30:00");
-    private static LocalTime c2b = LocalTime.parse("11:15:00");
-    private static LocalTime c3b = LocalTime.parse("13:35:00");
-    private static LocalTime c4b = LocalTime.parse("15:20:00");
-    private static LocalTime c1e = LocalTime.parse("11:05:00");
-    private static LocalTime c2e = LocalTime.parse("12:50:00");
-    private static LocalTime c3e = LocalTime.parse("15:10:00");
-    private static LocalTime c4e = LocalTime.parse("16:55:00");
-    static Schedule schedule;
-    private static HashMap<String, HashMap<Byte, NewCouple>> newSchedule = new HashMap<>();
+    private static final HashMap<String, HashMap<Byte, Couple>> schedule = new HashMap<>();
 
     public ScheduleManager() {
-        newSchedule.put("firstDenominator", new HashMap<>());
-        newSchedule.put("firstNumerator", new HashMap<>());
-        newSchedule.put("secondDenominator", new HashMap<>());
-        newSchedule.put("secondNumerator", new HashMap<>());
+        schedule.put("firstDenominator", new HashMap<>());
+        schedule.put("firstNumerator", new HashMap<>());
+        schedule.put("secondDenominator", new HashMap<>());
+        schedule.put("secondNumerator", new HashMap<>());
     }
 
-    public static void addToSchedule(String map, Byte id, NewCouple couple) {
-        newSchedule.get(map).put(id,couple);
+    public static void addToSchedule(String map, Byte id, Couple couple) {
+        schedule.get(map).put(id,couple);
     }
 
-    private static NewCouple getFromSchedule(String map, Byte id) {
-        return newSchedule.get(map).get(id);
+    private static Couple getFromSchedule(String map, Byte id) {
+        return schedule.get(map).get(id);
     }
 
-    public static ArrayList<NewCouple> getCouplesForDay(Primat primat, int day) {
-        ArrayList<NewCouple> couples = new ArrayList<>();
+    public static ArrayList<Couple> getCouplesForDay(Primat primat, int day) {
+        ArrayList<Couple> couples = new ArrayList<>();
 
         for (int i = 1; i <= 4; i++) {
             couples.add(getCouple(primat, (byte) (i + (day - 1) * 4)));
@@ -52,7 +37,7 @@ public class ScheduleManager {
         return couples;
     }
 
-    public static ArrayList<NewCouple> getSmartCouplesForDay(Primat primat, int day) {
+    public static ArrayList<Couple> getSmartCouplesForDay(Primat primat, int day) {
         if (getCurrentTimeFlag() == 5) {
             day++;
             if (day == 6) {
@@ -62,13 +47,13 @@ public class ScheduleManager {
         return getCouplesForDay(primat, day);
     }
 
-    public static NewCouple getCouple(Primat primat, byte id) {
+    public static Couple getCouple(Primat primat, byte id) {
         return getFromSchedule(getMapName(primat.getSubGroup()), id);
     }
 
-    public static NewCouple getNextCouple(Primat primat) {
+    public static Couple getNextCouple(Primat primat) {
         byte id = getNextCoupleId();
-        NewCouple couple = getCouple(primat, id);
+        Couple couple = getCouple(primat, id);
         System.out.println("para?");
         while (couple.getTitle().equals("none")) {
             id++;
@@ -92,7 +77,7 @@ public class ScheduleManager {
         } else if (now.isBefore(c3b)) {
             System.out.println("r3");
             return 3;
-        } else if (now.isBefore(c4e)) {
+        } else if (now.isBefore(c4b)) {
             System.out.println("r4");
             return 4;
         } else{

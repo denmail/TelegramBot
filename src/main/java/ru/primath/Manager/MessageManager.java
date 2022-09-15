@@ -1,8 +1,7 @@
 package ru.primath.Manager;
 
-import ru.primath.Objects.NewCouple;
+import ru.primath.Objects.Couple;
 import ru.primath.Objects.Primat;
-import ru.primath.Objects.Schedule.Couple;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
@@ -12,7 +11,6 @@ import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +20,11 @@ public class MessageManager {
     private static final String menu_photo = "AgACAgIAAxkBAAIR3GMiUEzsI8AduKyttnnV9NwEppbNAALfwTEbSpURSaNKTQeawxVzAQADAgADeQADKQQ";
     private static final String registerAccepted_photo = "AgACAgIAAxkBAAIR3mMiUFARoG6OcB30Khj5H0YbAnpTAALgwTEbSpURSRfk0bXl52J2AQADAgADeAADKQQ";
     private static final String registerAborted_photo = "AgACAgIAAxkBAAIR4mMiUFa5hnMRbhA5ZPFNxFidQrIiAALiwTEbSpURSW8nql5n_cmaAQADAgADeQADKQQ";
+    private static final String profile_photo = "AgACAgIAAxkBAAIS22Mi6JlEnW5cFDDDjYow-s65vIkmAAKnvzEbSpUZSVxJOHwuoOZTAQADAgADeQADKQQ";
 
+
+    private static final String em_monkey = "\uD83D\uDC35";
+    private static final String em_party = "\uD83C\uDF89";
     public static SendPhoto startPhoto(Long chatId) {
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setPhoto(new InputFile(primat_photo));
@@ -70,15 +72,6 @@ public class MessageManager {
         return sendPhoto;
     }
 
-    public static SendMessage menuuMessage(Long chatId) {
-        SendMessage menuMessage = new SendMessage();
-        menuMessage.setText("Меню (не придумал пока)");
-        menuMessage.setChatId(chatId);
-        KeyboardManager keyboardManager = new KeyboardManager();
-        keyboardManager.setButtons(menuMessage);
-        return menuMessage;
-    }
-
     public static SendPhoto registerPhoto(CallbackQuery callbackQuery) {
         SendPhoto registerPhoto = new SendPhoto();
 
@@ -121,7 +114,7 @@ public class MessageManager {
         SendMessage fuckMessageToSender = new SendMessage();
         String primatLink = "[" + toPrimat.getName() + "](t.me/" + toPrimat.getUsername()+")";
         fuckMessageToSender.setChatId(fromPrimat.getChatId());
-        fuckMessageToSender.setText(primatLink + " послан\uD83C\uDF89");
+        fuckMessageToSender.setText(primatLink + " послан(-а)" + em_party);
         fuckMessageToSender.enableMarkdown(true);
         fuckMessageToSender.disableWebPagePreview();
         return fuckMessageToSender;
@@ -131,7 +124,7 @@ public class MessageManager {
         SendMessage fuckMessageToReceiver = new SendMessage();
         String primatLink = "[" + fromPrimat.getName() + "](t.me/" + fromPrimat.getUsername()+")";
         fuckMessageToReceiver.setChatId(toPrimat.getChatId());
-        fuckMessageToReceiver.setText(primatLink + " послал(-а) тебя нахуй!\uD83C\uDF89\nОтветишь или терпила?");
+        fuckMessageToReceiver.setText(primatLink + " послал(-а) тебя нахуй!" + em_party + "\nОтветишь или терпила?");
         fuckMessageToReceiver.enableMarkdown(true);
         fuckMessageToReceiver.disableWebPagePreview();
 
@@ -172,7 +165,7 @@ public class MessageManager {
         return fuckMessageToReceiver;
     }
 
-    public static SendMessage nextCoupleMessage(Long chatId, NewCouple couple) {
+    public static SendMessage nextCoupleMessage(Long chatId, Couple couple) {
         SendMessage nextCoupleMessage = new SendMessage();
         nextCoupleMessage.setChatId(chatId);
         nextCoupleMessage.setText(String.format("%s в %s, не потеряйся!", couple.getTitle(), couple.getAud()));
@@ -190,26 +183,52 @@ public class MessageManager {
 
     public static SendMessage scheduleMessage(Primat primat, int day, boolean isWeek) {
         String[] days = {"Понедельник", "Вторник", "Среду", "Четверг", "Пятницу"};
-        String text = String.format("Расписание на %s\n\n", days[day-1]);
+        StringBuilder text = new StringBuilder(String.format("Расписание на %s\n\n", days[day - 1]));
 
-        ArrayList<NewCouple> couples;
+        ArrayList<Couple> couples;
         if (isWeek) {
             couples = ScheduleManager.getCouplesForDay(primat, day);
         } else {
             couples = ScheduleManager.getSmartCouplesForDay(primat, day);
         }
-        for (NewCouple couple: couples) {
+        for (Couple couple: couples) {
             if (couple.getTitle().equals("none")) {
-                text += "--\n\n";
+                text.append("--\n\n");
             } else {
-                text += String.format("%s в %s\n\n", couple.getTitle(), couple.getAud());
+                text.append(String.format("%s в %s\n\n", couple.getTitle(), couple.getAud()));
             }
         }
 
         SendMessage dayScheduleMessage = new SendMessage();
-        dayScheduleMessage.setText(text);
+        dayScheduleMessage.setText(text.toString());
         dayScheduleMessage.setChatId(primat.getChatId());
         return dayScheduleMessage;
     }
 
+    public static SendMessage usefulMessage(Long chatId) {
+        SendMessage usefulMessage = new SendMessage();
+        usefulMessage.setChatId(chatId);
+        usefulMessage.setText("Действительно считаешь, что здесь могло что-то быть?");
+        return usefulMessage;
+    }
+
+    public static SendPhoto profilePhoto(Long chatId) {
+        SendPhoto profilePhoto = new SendPhoto();
+        profilePhoto.setChatId(chatId);
+        profilePhoto.setPhoto(new InputFile(profile_photo));
+        return profilePhoto;
+    }
+
+    public static SendMessage profileMessage(Primat primat) {
+        SendMessage profileMessage = new SendMessage();
+        profileMessage.setChatId(primat.getChatId());
+        profileMessage.disableWebPagePreview();
+
+        String primatLink = "[" + primat.getName() + "](t.me/" + primat.getUsername()+")";
+        profileMessage.enableMarkdown(true);
+        profileMessage.setText(em_monkey + "ПРОФИЛЬ" + em_monkey +
+                "\n\nИмя: " + primatLink +
+                "\nПодгруппа: " + primat.getSubGroup());
+        return profileMessage;
+    }
 }
